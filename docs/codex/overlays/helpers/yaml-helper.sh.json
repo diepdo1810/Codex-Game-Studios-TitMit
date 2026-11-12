@@ -1,0 +1,18 @@
+{
+  "source": ".claude/hooks/yaml-helper.sh",
+  "source_sha256": "8299e656cb8afc49ec02b2e17e32b61f3df50b13b93a8544226e30e459f68424",
+  "edits": [
+    {
+      "find": "engine.name::Godot|Unity|Unreal",
+      "replace": "engine.name::Godot|Unity|Unreal|Web"
+    },
+    {
+      "find": "    godot)   root=\"src\" ;;\n    unity)   root=\"Assets\" ;;",
+      "replace": "    godot)   root=\"src\" ;;\n    web)\n      root=\"src\"\n      # Existing Web games may declare an explicit relative source root.\n      # Never silently scan another engine root or invent a missing path.\n      local web_root=\"\"\n      web_root=$(resolve_setting engine.code_root)\n      web_root=${web_root%%$'\\t'*}\n      if [ -n \"$web_root\" ]; then\n        case \"$web_root\" in\n          /*|*\\\\*|.|..|../*|*/..|*/../*|*/./*|./*)\n            root=\"\"; src=\"\" ;;\n          *)\n            if [ -d \"$_YH_ROOT/$web_root\" ]; then\n              root=\"$web_root\"; src=\"engine.code_root\"\n            else\n              root=\"\"; src=\"\"\n            fi\n            ;;\n        esac\n      elif [ -f \"$_YH_ROOT/package.json\" ] && [ ! -d \"$_YH_ROOT/src\" ]; then\n        root=\"\"; src=\"\"\n      fi\n      ;;\n    unity)   root=\"Assets\" ;;"
+    },
+    {
+      "find": "  if [ -z \"$root\" ]; then\n    for d in \"$_YH_ROOT\"/*/; do",
+      "replace": "  if [ -z \"$root\" ] && [ \"$(printf '%s' \"$ename\" | tr '[:upper:]' '[:lower:]')\" != web ]; then\n    for d in \"$_YH_ROOT\"/*/; do"
+    }
+  ]
+}

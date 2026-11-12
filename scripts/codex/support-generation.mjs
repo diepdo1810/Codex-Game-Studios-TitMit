@@ -31,7 +31,8 @@ export function supportTargets(selectedRoot = root, gitSource = openSource({root
       if (!Array.isArray(edits) || !edits.length) throw new Error('Empty helper overlay: ' + source);
       for (const edit of edits) {
         if (typeof edit.find !== 'string' || !edit.find || typeof edit.replace !== 'string' || content.split(edit.find).length !== 2) throw new Error('Helper overlay anchor mismatch: ' + source);
-        content = content.replace(edit.find, edit.replace);
+        // Use callback: Bash `$'...'` is literal text, not a JavaScript replacement token.
+        content = content.replace(edit.find, () => edit.replace);
       }
       transform_ids.push((patch.edits ? 'helper-overlay-v2:' : 'helper-overlay-v1:') + createHash('sha256').update(readFileSync(overlayPath)).digest('hex'));
     }

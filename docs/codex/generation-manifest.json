@@ -1795,6 +1795,7 @@
         "mirror-claude-paths",
         "neutral-project-env",
         "native-hook-root-markers-v1",
+        "helper-overlay-v2:f3fb39cd8e1c6e1f933636842f7d8897d357744bef97e220c464e61a05313442",
         "explicit-project-root"
       ],
       "owner": "CGS-25",
@@ -2350,7 +2351,8 @@
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:a48def5884ea0e4efe5bbdb9ab876ec9382163cca98658ced5a7b32c2615cd8d"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2365,7 +2367,8 @@
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:c019f6e0fabb3248762a97e583b05fbc7f72bf221cfa51f9651dbdab83bd1dfb"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2532,7 +2535,8 @@
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:ece8a6bca1e68d95f313e576513797a3686a56431e794c9784233f4d2404a2bd"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2562,7 +2566,8 @@
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:6c1671654252a43b61d3e5e7eaeb0084247eeb5af3a5835e1838bc899f632d58"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
