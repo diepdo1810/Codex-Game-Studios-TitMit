@@ -1,12 +1,12 @@
 # Story 003: Gacha cây và vật phẩm
 
 > **Epic**: Pixel Watering Game
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Integration
 > **Estimate**: M
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: N/A — implementation has not started
+> **Last Updated**: 2026-11-12
 
 ## Context
 
@@ -31,11 +31,11 @@
 
 *From design/game-brief.md and the approved decision that tokens are earned in game only:*
 
-- [ ] The player can start a gacha roll by spending the required in-game token balance.
-- [ ] A valid roll selects a random plant or item reward.
-- [ ] A popup shows the reward after the roll.
-- [ ] The roll deducts its token cost; an unaffordable roll does not deduct tokens or grant a reward.
-- [ ] The roll uses no paid tokens or advertisements.
+- [x] The player can start a gacha roll by spending the required in-game token balance.
+- [x] A valid roll selects a random plant or item reward.
+- [x] A popup shows the reward after the roll.
+- [x] The roll deducts its token cost; an unaffordable roll does not deduct tokens or grant a reward.
+- [x] The roll uses no paid tokens or advertisements.
 
 The brief does not set a numeric roll cost; its balance value remains to be chosen during implementation.
 
@@ -68,9 +68,18 @@ N/A — no qa-lead specs at this tier; implement against the Acceptance Criteria
 **Required evidence**:
 - Automated tests are waived (advisory) at qa.level minimal.
 
-**Status**: [ ] Not yet created
+**Status**: Verified — 12 unit tests, 6 Playwright tests.
 
 ## Dependencies
 
 - Depends on: production/epics/pixel-watering-game/story-002-cycle-token-reward.md
 - Unlocks: production/epics/pixel-watering-game/story-004-collection-local-save.md
+
+## Completion Notes
+
+**Completed**: 2026-11-12
+**Criteria**: 5/5 PASS. Earned tokens pay cost3; seeded uniform RNG selects plant/item rewards; native popup names reward. Unaffordable and hidden repeat rolls do not spend/grant; no paid tokens or ads.
+**Test Evidence**: build and bare `npm test` PASS (final suite: 25 unit, 21 browser). Native keyboard Space correctly closes popup without watering. Screenshot `production/qa/evidence/story-003-token-gacha/01-reward-popup-mobile.png` opened: Dương xỉ reward, balance0 after cost3; refused roll state unchanged. Console/page errors: none. Ordinary sessions use fresh cryptographic entropy; explicit `?seed=0` and `?seed=7` remain reproducible.
+**Reviewed by**: separate engine reviewer, source review PASS; browser verification by Codex.
+**Run result**: OBSERVED — mobile reward popup and correct token deduction.
+**Deviations**: reward catalog six stable plant/item IDs in config; accessible native dialog and styles in index.html. No feature scope added.

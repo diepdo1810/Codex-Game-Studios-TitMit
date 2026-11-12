@@ -1,16 +1,66 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#203c38">
+<link rel="icon" href="data:,">
 <title>Pixel Watering Game</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
-  canvas { display: block; margin: 0 auto; touch-action: none; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body { background: #203c38; color: #29443b; font-family: ui-monospace, monospace; display: grid; place-items: center; }
+  #garden { position: relative; width: min(100vw, 56.25dvh); aspect-ratio: 9 / 16; overflow: hidden; background: #b5e1e6; }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; image-rendering: pixelated; }
+  .hud { position: absolute; top: 5%; left: 8%; right: 8%; text-align: center; pointer-events: none; }
+  h1 { font-size: clamp(16px, 4vw, 24px); margin: 0 0 6px; letter-spacing: 2px; }
+  .subtitle { font-size: clamp(10px, 2.5vw, 13px); margin: 0 0 20px; }
+  .growth-label { display: flex; justify-content: space-between; font-size: clamp(10px, 2.5vw, 13px); }
+  progress { appearance: none; display: block; width: 100%; height: 12px; border: 2px solid #52694d; background: #edf1cc; }
+  progress::-webkit-progress-bar { background: #edf1cc; }
+  progress::-webkit-progress-value { background: #75a75b; }
+  progress::-moz-progress-bar { background: #75a75b; }
+  .controls { position: absolute; bottom: 6%; left: 8%; right: 8%; display: flex; justify-content: center; gap: 10px; }
+  button { min-height: 46px; border: 2px solid #3e6653; box-shadow: 0 4px 0 #3e6653; background: #f3e9bc; color: #29443b; padding: 8px 12px; font: bold 13px ui-monospace, monospace; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  button:active { transform: translateY(3px); box-shadow: 0 1px 0 #3e6653; }
+  button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+  .hint { position: absolute; bottom: 1.5%; left: 0; width: 100%; text-align: center; font-size: 10px; color: #e8e6c4; }
+  #gacha-status { position: absolute; bottom: 16%; left: 5%; right: 5%; margin: 0; text-align: center; font-size: 11px; color: #fff4cb; }
+  dialog { width: min(84vw, 340px); padding: 28px 20px; border: 4px solid #3e6653; background: #fff1cc; color: #29443b; text-align: center; box-shadow: 8px 8px 0 #203c38; }
+  dialog::backdrop { background: #203c38bb; }
+  dialog h2 { font-size: 19px; }
+  #reward-name { font-size: 24px; font-weight: bold; }
+  #collection-open { position: absolute; top: 35%; left: 0; right: 0; margin-inline: auto; width: max-content; min-height: 32px; padding: 5px 12px; font-size: 11px; }
+  #save-status { position: absolute; bottom: 21%; left: 4%; right: 4%; font-size: 9px; color: #fff1cc; text-align: center; margin: 0; }
+  #collection-list { list-style: none; padding: 0; max-height: 40dvh; overflow-y: auto; text-align: left; }
+  #collection-list li { border-bottom: 1px solid #b8c38a; padding: 12px 4px; font-size: 15px; }
 </style>
 </head>
 <body>
-<canvas id="game"></canvas>
+<main id="garden" aria-label="Khu vườn pixel">
+  <canvas id="game" aria-label="Chậu cây và bình tưới"></canvas>
+  <header class="hud">
+    <h1>VƯỜN NHỎ</h1>
+    <p class="subtitle">Một chút nước, một chút bình yên.</p>
+    <div class="growth-label"><label for="growth">Tăng trưởng</label><span id="growth-value">0%</span></div>
+    <progress id="growth" value="0" max="100">0%</progress>
+  </header>
+  <p id="gacha-status" role="status"></p>
+  <p id="save-status" role="status"></p>
+  <button id="collection-open" type="button">Bộ sưu tập</button>
+  <div class="controls"><button id="water" type="button">Tưới cây</button><button id="gacha" type="button">Gacha</button></div>
+  <div class="hint">Chạm để tưới · Space · P tạm dừng · M âm thanh</div>
+</main>
+<dialog id="reward" aria-labelledby="reward-title">
+  <h2 id="reward-title">Bạn nhận được</h2>
+  <p id="reward-name"></p><p id="reward-kind"></p>
+  <button id="close-reward" type="button">Đóng</button>
+</dialog>
+<dialog id="collection" aria-labelledby="collection-title">
+  <h2 id="collection-title">Bộ sưu tập của bạn</h2>
+  <ul id="collection-list"></ul>
+  <button id="close-collection" type="button">Đóng bộ sưu tập</button>
+</dialog>
 <script type="module" src="./src/main.ts"></script>
 </body>
 </html>

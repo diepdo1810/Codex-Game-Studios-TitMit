@@ -6,6 +6,27 @@ on:
 permissions:
   contents: read
 jobs:
+  pixel-watering-game:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm test
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: pixel-watering-browser-evidence
+          path: test-results/
+          if-no-files-found: ignore
   quick:
     runs-on: ubuntu-latest
     steps:

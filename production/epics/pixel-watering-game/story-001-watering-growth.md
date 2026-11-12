@@ -1,12 +1,12 @@
 # Story 001: Tưới cây và tăng trưởng
 
 > **Epic**: Pixel Watering Game
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Visual/Feel
 > **Estimate**: M
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: N/A — implementation has not started
+> **Last Updated**: 2026-11-12
 
 ## Context
 
@@ -31,11 +31,11 @@
 
 *From design/game-brief.md, scoped to this story:*
 
-- [ ] A touch on the watering control tilts the watering can and starts a visible stream into the pot.
-- [ ] Watering causes the plant to play a visible response animation.
-- [ ] Watering advances the growth bar.
-- [ ] The player can stop after any watering action without entering a fail state.
-- [ ] The watering interaction works in the portrait mobile game view.
+- [x] A touch on the watering control tilts the watering can and starts a visible stream into the pot.
+- [x] Watering causes the plant to play a visible response animation.
+- [x] Watering advances the growth bar.
+- [x] The player can stop after any watering action without entering a fail state.
+- [x] The watering interaction works in the portrait mobile game view.
 
 ---
 
@@ -50,6 +50,9 @@ Use the existing Phaser game entry point and game rules as the starting point. K
 
 ## Files
 
+- index.html
+- data/config.json
+- playwright.config.ts (HTTP test server; managed Chromium blocks file URLs)
 - src/main.ts
 - src/game/rules.ts
 - tests/unit/rules.test.ts (advisory at qa.level minimal)
@@ -66,9 +69,18 @@ N/A — no qa-lead specs at this tier; implement against the Acceptance Criteria
 - Retained screenshot in production/qa/evidence/ and sign-off in production/qa/evidence/watering-growth-evidence.md
 - Automated tests are waived (advisory) at qa.level minimal.
 
-**Status**: [ ] Not yet created
+**Status**: Verified — 6 unit tests, 4 Playwright tests; retained screenshots inspected.
 
 ## Dependencies
 
 - Depends on: None
 - Unlocks: production/epics/pixel-watering-game/story-002-cycle-token-reward.md
+
+## Completion Notes
+
+**Completed**: 2026-11-12
+**Criteria**: 5/5 PASS. Touch and Space start watering, connected stream enters pot, plant responds, growth increases, idle preserves growth, portrait 9:16 verified.
+**Test Evidence**: `npm run build` PASS; `PAGE_SHOT_BROWSER=/usr/bin/chromium npm test` PASS (6 unit, 4 browser). Screenshots retained locally under `production/qa/evidence/story-001-watering-growth/` and opened by Codex. Sign-off: `production/qa/evidence/watering-growth-evidence.md`.
+**Reviewed by**: separate engine reviewer; disconnected stream finding fixed and verified visually. Native role loading and human playtest not claimed.
+**Run result**: OBSERVED — mobile and desktop watering at 20%, visible plant response and water from spout into pot; no page/console errors after fix.
+**Deviations**: `index.html` supplies accessible controls and portrait frame; `playwright.config.ts` serves the real build over HTTP. No gameplay scope added.

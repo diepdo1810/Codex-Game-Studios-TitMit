@@ -1,5 +1,5 @@
-// Playwright runs tests/integration/ against dist-single/index.html, opened from
-// disk: no dev server and no port (npm run test:e2e builds it first).
+// Playwright runs tests/integration/ against dist-single through local HTTP.
+// Managed Chromium blocks file URLs; npm run test:e2e builds before preview starts.
 import { defineConfig } from '@playwright/test';
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
@@ -11,7 +11,7 @@ import { join } from 'node:path';
 // own browser (npx playwright install chromium-headless-shell).
 function checkBrowser(): string | undefined {
   const script = '.agents/scripts/page-shot.sh';
-  if (!existsSync(script)) return process.env.PAGE_SHOT_BROWSER || undefined;
+  if (!existsSync(script)) return process.env.PAGE_SHOT_BROWSER || (existsSync('/usr/bin/chromium') ? '/usr/bin/chromium' : undefined);
   const r = spawnSync(bash(), [script, '--which'], { encoding: 'utf8' });
   return r.status === 0 && r.stdout.trim() ? r.stdout.trim() : undefined;
 }
@@ -29,6 +29,11 @@ function bash(): string {
 }
 
 export default defineConfig({
+  webServer: {
+    command: 'npm exec vite -- preview --outDir dist-single --host 127.0.0.1 --port 4173 --strictPort',
+    url: 'http://127.0.0.1:4173',
+    reuseExistingServer: !process.env.CI,
+  },
   testDir: 'tests/integration',
   forbidOnly: !!process.env.CI,
   use: {

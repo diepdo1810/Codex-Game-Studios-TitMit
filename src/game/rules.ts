@@ -1,31 +1,27 @@
-// The game's rules: plain TypeScript with no browser in it, so Vitest can run
-// them in Node (tests/unit/). Everything that touches the page is in main.ts.
-
-/** The values the rules read, from data/config.json. */
+/** Gameplay tuning loaded from data/config.json. */
 export interface Tuning {
-  /** Speed of the player's square, in logical pixels a second. */
-  speed: number;
+  growthPerWater: number;
+  wateringDuration: number;
+  cycleReward: number;
 }
 
-/** The game's own state; window.game.state reports it to the checks. */
+/** Observable garden state; presentation reads without owning game rules. */
 export interface State {
-  /** Seconds of play. */
   t: number;
-  score: number;
-  x: number;
-  y: number;
+  growth: number;
+  watering: number;
+  response: number;
+  tokens: number;
+  cycles: number;
+  unlocked: string[];
 }
 
-/** The size of the play field, in logical pixels. */
-export const FIELD = { w: 320, h: 180, size: 8 } as const;
-
-/** Simulation step in seconds: motion is per second, never per frame. */
+/** Portrait logical pixel field. */
+export const FIELD = { w: 180, h: 320 } as const;
+/** Fixed simulation step in seconds. */
 export const STEP = 1 / 60;
 
-/**
- * A seeded random number generator (mulberry32). Every gameplay random call
- * reads one of these, never Math.random, so a replay repeats exactly.
- */
+/** Seeded gameplay random source, retained for deterministic rewards. */
 export function makeRng(seed: number): () => number {
   let s = seed | 0;
   return () => {
@@ -36,24 +32,41 @@ export function makeRng(seed: number): () => number {
   };
 }
 
-/** A new session's state. */
+/** Creates a garden without timers that punish the player for stopping. */
 export function newState(): State {
-  return { t: 0, score: 0, x: (FIELD.w - FIELD.size) / 2, y: (FIELD.h - FIELD.size) / 2 };
+  return { t: 0, growth: 0, watering: 0, response: 0, tokens: 0, cycles: 0, unlocked: [] };
 }
 
-/** Which way the player is pushing, each -1, 0 or 1. */
-export interface Move {
-  dx: number;
-  dy: number;
-}
+/** One discrete watering action, independent of pointer or keyboard source. */
+export interface Action { water: boolean; }
 
-/** One step of play: moves the square, kept inside the field. */
-export function update(state: State, move: Move, tuning: Tuning, dt: number): void {
+/** Advances animation timers and accepts a watering action when can is ready. */
+export function update(state: State, action: Action, tuning: Tuning, dt: number): void {
   state.t += dt;
-  state.x = clamp(state.x + move.dx * tuning.speed * dt, 0, FIELD.w - FIELD.size);
-  state.y = clamp(state.y + move.dy * tuning.speed * dt, 0, FIELD.h - FIELD.size);
+  state.watering = Math.max(0, state.watering - dt);
+  state.response = Math.max(0, state.response - dt);
+  if (!action.water || state.watering > 0) return;
+  state.growth = Math.min(100, state.growth + tuning.growthPerWater);
+  if (state.growth >= 100) {
+    state.growth = 0;
+    state.tokens += tuning.cycleReward;
+    state.cycles++;
+  }
+  state.watering = tuning.wateringDuration;
+  state.response = tuning.wateringDuration;
 }
 
-function clamp(v: number, lo: number, hi: number): number {
-  return Math.min(hi, Math.max(lo, v));
+/** Data-defined reward identity remains stable across collection and save features. */
+export interface Reward { id: string; name: string; kind: 'plant' | 'item'; }
+/** In-game token cost and uniform reward pool. */
+export interface GachaTuning { gachaCost: number; rewards: readonly Reward[]; }
+
+/** Spends earned tokens once and returns a reward; refusal leaves all state untouched. */
+export function roll(state: State, tuning: GachaTuning, random: () => number): Reward | null {
+  if (state.tokens < tuning.gachaCost || tuning.rewards.length === 0) return null;
+  const reward = tuning.rewards[Math.floor(random() * tuning.rewards.length)];
+  if (!reward) return null;
+  state.tokens -= tuning.gachaCost;
+  if (!state.unlocked.includes(reward.id)) state.unlocked.push(reward.id);
+  return reward;
 }

@@ -8,7 +8,7 @@
 //   window.GAME_AUDIO   an AudioContext a check may inject
 //   ?manual=1           the loop does not run; only step() moves the game
 //   ?scene=<name>       start in that scene
-//   ?seed=<n>           the seed, instead of data/config.json's
+//   ?seed=<n>           deterministic replay seed, instead of fresh startup entropy
 //
 // Players never see any of it. window.game is set once the game can be driven; a library that
 // starts after the page loads (Phaser, PixiJS) sets it then, and until then window.game is the
@@ -52,7 +52,10 @@ export const clock: Clock = window.GAME_CLOCK ?? { now: () => performance.now() 
 
 /** The seed from ?seed=, else the fallback. */
 export function seedFrom(fallback: number): number {
-  return Number(params.get('seed')) || fallback;
+  const raw = params.get('seed');
+  if (raw === null || raw.trim() === '') return fallback;
+  const seed = Number(raw);
+  return Number.isFinite(seed) ? seed : fallback;
 }
 
 /** An AudioContext a check injected, else a new one. */

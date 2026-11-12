@@ -1,12 +1,12 @@
 # Story 002: Nhận token sau chu kỳ
 
 > **Epic**: Pixel Watering Game
-> **Status**: Ready
+> **Status**: Complete
 > **Layer**: Feature
 > **Type**: Logic
 > **Estimate**: S
 > **Manifest Version**: N/A (minimal — no control manifest)
-> **Last Updated**: N/A — implementation has not started
+> **Last Updated**: 2026-11-12
 
 ## Context
 
@@ -31,11 +31,11 @@
 
 *From design/game-brief.md, scoped to this story:*
 
-- [ ] Reaching full growth completes the current growth cycle.
-- [ ] Completing a cycle grants a positive token reward earned in game.
-- [ ] After the reward, growth begins a new cycle.
-- [ ] The earned token balance is available to the gacha during the current play session.
-- [ ] Completing or pausing a cycle never creates a fail state.
+- [x] Reaching full growth completes the current growth cycle.
+- [x] Completing a cycle grants a positive token reward earned in game.
+- [x] After the reward, growth begins a new cycle.
+- [x] The earned token balance is available to the gacha during the current play session.
+- [x] Completing or pausing a cycle never creates a fail state.
 
 The brief does not set a numeric cycle reward; its balance value remains to be chosen during implementation.
 
@@ -67,9 +67,18 @@ N/A — no qa-lead specs at this tier; implement against the Acceptance Criteria
 **Required evidence**:
 - Automated tests are waived (advisory) at qa.level minimal.
 
-**Status**: [ ] Not yet created
+**Status**: Verified — 8 unit tests, 5 Playwright tests.
 
 ## Dependencies
 
 - Depends on: production/epics/pixel-watering-game/story-001-watering-growth.md
 - Unlocks: production/epics/pixel-watering-game/story-003-token-gacha.md, production/epics/pixel-watering-game/story-004-collection-local-save.md
+
+## Completion Notes
+
+**Completed**: 2026-11-12
+**Criteria**: 5/5 PASS. Five watering actions complete a cycle, grant 3 in-game tokens once and reset growth to 0; idle/pause preserve state. Token balance remains available in session.
+**Test Evidence**: `npm run build` and bare `npm test` PASS (8 unit, 5 browser). Mobile screenshot `production/qa/evidence/story-002-cycle-token-reward/01-cycle-token-mobile.png` opened: Token3, cycle1, growth0. Console/page errors: none.
+**Reviewed by**: separate engine reviewer, source review PASS; browser verification by Codex. No human playtest claimed.
+**Run result**: OBSERVED — mobile cycle reward and new growth cycle.
+**Deviations**: cycleReward3 selected as allowed by brief; intended gachaCost3. Playwright config detects system Chromium for bare `npm test`.
