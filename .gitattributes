@@ -1,0 +1,20 @@
+# Native instructions and integrity metadata use stable LF bytes on every OS.
+*.md text eol=lf
+*.mjs text eol=lf
+*.sh text eol=lf
+*.awk text eol=lf
+*.tsv text eol=lf
+/.agents/** text eol=lf
+/.codex/** text eol=lf
+/scripts/codex/** text eol=lf
+/docs/codex/** text eol=lf
+/AGENTS.md text eol=lf
+/**/AGENTS.md text eol=lf
+
+# Media retain their original bytes.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.mp4 binary
+*.wav binary

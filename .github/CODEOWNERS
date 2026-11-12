@@ -1,0 +1,9 @@
+# Review ownership for the maintained fork.
+# GitHub repository settings determine whether code-owner approval is required.
+*                           @ScrabyQ
+/AGENTS.md                  @ScrabyQ
+/.agents/                   @ScrabyQ
+/.codex/                    @ScrabyQ
+/scripts/codex/             @ScrabyQ
+/project.yaml               @ScrabyQ
+/.github/                   @ScrabyQ

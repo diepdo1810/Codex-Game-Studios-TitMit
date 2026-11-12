@@ -1,0 +1,7 @@
+# Design work
+
+Resolve workflow before evaluating required artifacts; consult `.agents/docs/workflow-modes.md`, coding standards and the selected native path rules. At `full`, GDDs use these sections in order: Overview, Player Fantasy, Detailed Rules, Formulas, Edge Cases, Dependencies, Tuning Knobs, Acceptance Criteria. At `standard`, require Overview, Detailed Rules, Edge Cases, Dependencies and Acceptance Criteria, plus Formulas when math is involved. At `minimal`, use `design/game-brief.md` instead of requiring a GDD. `Detailed Design` and `Detailed Rules` name the same section; accept either without gratuitous renaming.
+
+Name GDDs `design/gdd/<system-slug>.md` and update `design/gdd/systems-index.md` when adding one. Design in Foundation → Core → Feature → Presentation → Polish order. Use the installed `$design-review` after authoring a GDD and `$review-all-gdds` for a related set within the authorized workflow.
+
+Small tuning changes and minor mechanics use `design/quick-specs/` through `$quick-design`. UX specs use `design/ux/<screen-name>.md`, HUD `design/ux/hud.md` and pattern library `design/ux/interaction-patterns.md`. Project-wide accessibility requirements stay at `design/accessibility-requirements.md`, outside `design/ux/`, because workflow gates check that exact path. Use `$ux-design` and `$ux-review` before the authorized `$team-ui` handoff. A recommendation alone does not launch another Skill.

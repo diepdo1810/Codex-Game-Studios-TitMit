@@ -1,0 +1,15 @@
+# Codex Game Studios
+
+Preserve upstream content and Git history. Work within the user's authorized scope and preserve unrelated edits. User instructions and host permissions govern; prior authorization persists. Before a still-unresolved decision or approval, prepare a reviewable draft and wait for an actual answer. An unanswered required question is not consent. Commit, push, delete and external writes require authorization; modes never supply it.
+
+`project.yaml` is shared configuration. Resolve allowed `project.local.yaml` overrides, shared settings, legacy mirrors, rigor expansion and documented defaults in that order. Invalid enums fall through with diagnostics. Do not seed the six rigor-fronted knobs. Resolve the current engine, specialists, workflow, automation and stage from actual state. Consult `.agents/docs/config-resolution.md`, `workflow-modes.md` and `automation-modes.md` on demand.
+
+After compaction, interruption or recovery, read `production/session-state/active.md` first when present. Helpers emit observations, not quality verdicts. Before game or engine work consult `.agents/docs/coding-standards.md`, `.agents/docs/coordination-rules.md` and the selected `docs/engine-reference/<engine>/VERSION.md` and relevant references. Do not guess engine signatures.
+
+Before editing, run `node scripts/codex/rules.mjs --path <repository-relative-path> --content`. If the selector is unavailable, inspect `.agents/rules/index.json` and the matching native rule files manually, and disclose the missing selector. Scoped instructions and rules do not claim automatic host enforcement.
+
+Use only role and Skill material relevant to the task. Native Skills live in `.agents/skills/`; role definitions live in `.codex/agents/`. Use actual available delegation or a disclosed in-session role fallback; the fallback is not an independent review. Resolve model preferences through `.codex/model-policy.json` with the current host's capabilities. Do not assume shell preprocessing, automatic imports, worktree isolation or native hook registration. See `docs/codex/onboarding.md` for setup and limits.
+
+Do not read secret `.env*` files, directly edit binary Unreal `.uasset`/`.umap` files, force-push, reset away work or push to Donchitos upstream. For shell/file changes, use the explicit PreToolUse proposal check in `docs/codex/hooks.md` and proceed only after exit 0 and existing authorization. Run PostToolUse validation for written files. If the adapter cannot execute, disclose that limit and inspect the same restrictions directly. No automatic enforcement is claimed without tested native activation.
+
+Checkpoint, delegated-return and notification fallbacks are explicit CLI actions. Missing artifacts and unavailable reviews never establish completion. Keep execution output in temporary or ignored storage, CI, the issue tracker or PR; do not track task journals, raw reports or machine-specific dumps. The maintained native product works offline; original-source inspection is a separate reviewed Git import described in `docs/codex/upstream-sync.md`.
