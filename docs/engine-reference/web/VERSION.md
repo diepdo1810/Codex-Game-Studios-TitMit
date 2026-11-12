@@ -40,10 +40,13 @@ its own lockfile.
   the JavaScript compiler API that 7.0 does not ship (`breaking-changes.md`).
 - **three.js types:** `three` ships no type declarations; `@types/three` does,
   versioned to match the three.js release.
-- **The one-shot uses the same three.js.** `/prototype` without an engine
-  bundles three.js 0.186.1 into one plain script (`.claude/scripts/vendor-three.sh`,
-  `.claude/skills/prototype/references/one-shot-files.md`), so a one-shot that
-  grows into a web project keeps its three.js version. Change both together.
+- **One-shot integration is not ported to Codex.** The upstream Claude-based
+  studio used a separate one-shot helper for three.js 0.186.1. That helper and
+  its one-shot file workflow were not migrated into this Codex fork, so do not
+  assume `$prototype` can vendor three.js automatically. Web projects should
+  use their selected starter's `package.json` and lockfile; verify installed
+  versions before reusing prototype code. Any future one-shot port needs a
+  separate compatibility review of its three.js version.
 
 Sources: the npm registry (`registry.npmjs.org/<package>`: `time`, `engines`,
 `peerDependencies`, `types`), read 2026-10-29. **[S]** — sourced: read in the
@@ -67,7 +70,7 @@ calls.
 
 This file is the template's pin, not the project's. A project made from the
 template matches it until someone upgrades; an existing web project set up
-with `/setup-engine web` keeps its own versions, which can be older (Vite 5, Phaser 3, PixiJS 7) or
+with `$setup-engine web` keeps its own versions, which can be older (Vite 5, Phaser 3, PixiJS 7) or
 newer than these. **Before trusting a version-qualified claim here, read the
 version the project actually installs**: the package's entry in the lockfile,
 or `node_modules/<package>/package.json`. A Phaser 3 project needs Phaser 3
