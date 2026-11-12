@@ -131,7 +131,15 @@ Engine and paid native-client checks are **opt-in**. Ordinary CI covers the tool
 - **Use explicit checks.** The [hook example](.codex/hooks.example.json) is inactive until reviewed and verified in the installed client. Path policies and CLI adapters do not claim automatic host enforcement.
 - **Recover from the checkpoint.** Read ignored `production/session-state/active.md` after interruption when present.
 
-From the repository root, validate the product and run its ordinary CI checks:
+From the repository root, validate the product and run its ordinary CI checks. If this repository was created using **Use this template**, GitHub copies the product files but may omit the pinned upstream source Git objects required by the deterministic generator checks. Fetch the **reviewed, pinned upstream commit** once (read-only for the working tree):
+
+```sh
+git fetch --no-tags --depth=1 https://github.com/Donchitos/Claude-Code-Game-Studios.git 05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418:refs/heads/source/ccgs-main
+```
+
+The source branch is a Git maintenance ref, not a project branch to merge. This fetch does not overwrite your game files.
+
+Then validate and run CI:
 
 ```sh
 node scripts/codex/validate.mjs
