@@ -139,7 +139,7 @@ async function writeAbsent(plans) {
 async function main() {
   const args = process.argv.slice(2);
   if (args.length > 1 || (args.length === 1 && !['--write','--json','--check'].includes(args[0]))) {
-    process.stderr.write('Usage: node scripts/codex/reference-generation.mjs [--check|--json|--write]\\n');
+    process.stderr.write('Usage: node scripts/codex/reference-generation.mjs [--check|--json|--write]\n');
     process.exitCode = 2;
     return;
   }
