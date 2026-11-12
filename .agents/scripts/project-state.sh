@@ -161,10 +161,23 @@ fi
 # (.agents/docs/directory-structure.md): Godot src/, Unity Assets/, Unreal Source/.
 case "$(printf '%s' "$ENGINE" | tr '[:upper:]' '[:lower:]')" in
   godot) CODE_ROOT="src" ;;
+  web)
+    CODE_ROOT="src"
+    WEB_ROOT=$(yaml_get project.yaml engine.code_root)
+    if [ -n "$WEB_ROOT" ]; then
+      case "$WEB_ROOT" in
+        /*|*\\*|..|../*|*/..|*/../*|*/./*|./*) CODE_ROOT=""; CSRC="" ;;
+        *) CODE_ROOT="$WEB_ROOT"; CSRC="engine.code_root" ;;
+      esac
+      [ -n "$CODE_ROOT" ] && [ -d "$CODE_ROOT" ] || { CODE_ROOT=""; CSRC=""; }
+    elif [ -f package.json ] && [ ! -d src ]; then
+      CODE_ROOT=""; CSRC=""
+    fi
+    ;;
   unity) CODE_ROOT="Assets" ;;
   unreal*) CODE_ROOT="Source" ;;
 esac
-if [ -z "$CODE_ROOT" ]; then
+if [ -z "$CODE_ROOT" ] && [ "$(printf '%s' "$ENGINE" | tr '[:upper:]' '[:lower:]')" != web ]; then
   # No usable engine: believe the tree only when exactly one root is present.
   # Names are compared exactly against the listing, never with `[ -d Assets ]`,
   # which is also true for Godot's assets/ on a case-insensitive filesystem.
@@ -180,7 +193,7 @@ if [ -n "$CODE_ROOT" ]; then
   # The source extensions detect-gaps.sh check 1 counts.
   SRC_FILES=$(count "$CODE_ROOT" -type f \( -name '*.gd' -o -name '*.cs' -o -name '*.cpp' \
               -o -name '*.c' -o -name '*.h' -o -name '*.hpp' -o -name '*.rs' -o -name '*.py' \
-              -o -name '*.js' -o -name '*.ts' \))
+              -o -name '*.js' -o -name '*.ts' -o -name '*.jsx' -o -name '*.tsx' \))
   SSRC="$CODE_ROOT"
 else
   SRC_FILES="unknown"; SSRC="code_root unset"

@@ -95,6 +95,34 @@ fi
 ENGINE_LC="$(printf '%s' "$ENGINE" | tr 'A-Z' 'a-z')"
 VERFILE="docs/engine-reference/$ENGINE_LC/VERSION.md"
 
+if [ "$ENGINE_LC" = web ]; then
+  # Web is a toolchain, not an editor binary. Do not compare Vite's version to
+  # the generic native Engine Version row or report a nonexistent "Web binary".
+  if [ ! -f package.json ]; then
+    skipped "Web package.json not found — source and build cannot be checked"
+    summarise
+  fi
+  if ! command -v node >/dev/null 2>&1; then
+    skipped "Web toolchain — Node.js not available to inspect package.json"
+    summarise
+  fi
+  declared=$(node -e 'try { const p=require("./package.json"); console.log(p.devDependencies?.vite || p.dependencies?.vite || "-") }catch { process.exit(1) }' 2>/dev/null)
+  if [ -z "$declared" ]; then
+    differs "package.json cannot be parsed by Node.js"
+  elif [ "$declared" = "-" ]; then
+    skipped "Vite version — project uses another bundler or no Vite dependency"
+  elif [ -n "$VERSION" ] && [ "$VERSION" = "$declared" ]; then
+    match "Web bundler version in project.yaml ($VERSION) equals package.json ($declared)"
+  elif [ -n "$VERSION" ]; then
+    differs "Web engine.version ($VERSION) differs from declared Vite dependency ($declared). Resolve against the project lockfile."
+  else
+    skipped "Web bundler version — project.yaml has no engine.version"
+  fi
+  match "Web project has package.json (this is not a build or test execution)"
+  skipped "Web runtime verification requires npm/pnpm/yarn/bun build, test and browser screenshot; not executed by project-coherence"
+  summarise
+fi
+
 # --- 1. VERSION.md carries a recorded installed-version probe -----------------
 if [ ! -f "$VERFILE" ]; then
   skipped "pinned-reference checks — $VERFILE does not exist"

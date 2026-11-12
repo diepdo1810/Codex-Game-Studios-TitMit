@@ -28,6 +28,10 @@ try {
  assert.equal(probe.status,0,probe.stderr);
  assert.match(probe.stdout,/package_json\s+present/);
  assert.match(probe.stdout,/package_manager\s+npm/);
+ const projectState=invoke(join(repo,'.agents/scripts/project-state.sh'),'--root',root);
+ assert.equal(projectState.status,0,projectState.stderr);
+ // Without a project.yaml the source root is detected from the one src/ folder.
+ assert.match(projectState.stdout,/source_files\s+[1-9][0-9]*/);
  const run=invoke(runner,'web','--root',root);
  assert.equal(run.status,0,run.stderr);
  assert.match(run.stdout,/web:no-dependencies/);

@@ -1485,7 +1485,7 @@ resolve_code_root() {
   #    is also true for Godot's own `assets/` on a case-insensitive filesystem
   #    (Windows, default macOS), which made src/ + assets/ "ambiguous" and a lone
   #    assets/ a Unity project.
-  if [ -z "$root" ]; then
+  if [ -z "$root" ] && [ "$(printf '%s' "$ename" | tr '[:upper:]' '[:lower:]')" != web ]; then
     for d in "$_YH_ROOT"/*/; do
       d="${d%/}"; d="${d##*/}"
       case "$d" in src|Assets|Source) found="$d"; n=$((n + 1)) ;; esac
