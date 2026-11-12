@@ -10,7 +10,7 @@ function fixture(name,shared,local,dirs=[],legacy=''){
  const root=path.join(temp,name);mkdirSync(root);
  if(shared!==null)writeFileSync(path.join(root,'project.yaml'),shared);
  if(local!==null)writeFileSync(path.join(root,'project.local.yaml'),local);
- for(const dir of dirs)mkdirSync(path.join(root,dir));
+ for(const dir of dirs)mkdirSync(path.join(root,dir),{recursive:true});
  if(legacy){mkdirSync(path.join(root,'.agents/docs'),{recursive:true});writeFileSync(path.join(root,'.agents/docs/technical-preferences.md'),legacy)}
  return root;
 }
