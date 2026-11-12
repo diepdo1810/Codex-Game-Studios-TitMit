@@ -3571,7 +3571,7 @@
       "verification": "Preserved source-bound backend and tested adapter equivalent; see per-declaration protocol/limits in parity matrix. Native activation and Linux remain PENDING.",
       "status": "EQUIVALENT",
       "target": ".agents/hooks/yaml-helper.sh",
-      "target_sha256": "1b12f5f17250d7fbe70bb2ace5d88895522f1bba5c698293d671ccb18ba6a74f",
+      "target_sha256": "6b2983ae1ad9ab69d144b72de498a87b629c57e6f1410205e87c1d88c4be651b",
       "task": "CGS-24"
     },
     {

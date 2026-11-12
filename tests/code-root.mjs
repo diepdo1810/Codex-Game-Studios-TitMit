@@ -14,6 +14,8 @@ function fixture(name,shared,local,dirs=[],legacy=''){
  if(legacy){mkdirSync(path.join(root,'.agents/docs'),{recursive:true});writeFileSync(path.join(root,'.agents/docs/technical-preferences.md'),legacy)}
  return root;
 }
+const syntax=spawnSync(bashPath(),['-n',helper],{encoding:'utf8'});
+assert.equal(syntax.status,0,'yaml-helper.sh Bash syntax invalid: '+syntax.stderr);
 function selected(root){const r=spawnSync(bashPath(),['-c','source "$1"; resolve_code_root','fixture',helper],{cwd:root,encoding:'utf8',env:{...process.env,CGS_PROJECT_DIR:root}});assert.equal(r.status,0,r.stderr);return r.stdout}
 try{
  assert.equal(selected(fixture('locked','engine:\n  name: Unity\n','engine:\n  name: Godot\n')), 'Assets\tengine.name');

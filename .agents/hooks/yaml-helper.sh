@@ -1470,11 +1470,27 @@ resolve_code_root() {
     godot)   root="src" ;;
     web)
       root="src"
-      # Web projects may keep code outside src/. Use an explicit shared path
-      # when recorded during safe adoption of an existing package.json project.
+      # Existing Web games may declare an explicit relative source root.
+      # Never silently scan another engine root or invent a missing path.
       local web_root=""
       web_root=$(resolve_setting engine.code_root)
-      web_root=${web_root%%
+      web_root=${web_root%%$'\t'*}
+      if [ -n "$web_root" ]; then
+        case "$web_root" in
+          /*|*\\*|.|..|../*|*/..|*/../*|*/./*|./*)
+            root=""; src="" ;;
+          *)
+            if [ -d "$_YH_ROOT/$web_root" ]; then
+              root="$web_root"; src="engine.code_root"
+            else
+              root=""; src=""
+            fi
+            ;;
+        esac
+      elif [ -f "$_YH_ROOT/package.json" ] && [ ! -d "$_YH_ROOT/src" ]; then
+        root=""; src=""
+      fi
+      ;;
     unity)   root="Assets" ;;
     unreal*) root="Source" ;;
     *)       root="" ;;
