@@ -50,7 +50,7 @@
       "transform_ids": [
         "codex-doc-reference-paths-v1",
         "codex-runtime-path-bridge-v1",
-        "reference-overlay-sha256:b9fcf255d7b7429e2a4176fe63bac90d9e6b7176f0b54fdb15fd4550c7288eb9"
+        "reference-overlay-sha256:30dcb1e83f63ed9f55a9cad1198d5caa7d9f504810768723e642cbbd7a2eb004"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
@@ -443,7 +443,7 @@
       "target_sha256": "1264a8904f8d36f61bebe9cac42ec081ed616ea6e7d227108b880d8b12976d0d",
       "transform_version": 1,
       "transform_ids": [
-        "reference-overlay-sha256:41687dce768b1fb5daef5e846c176117d44546d8d1813a5b06f3d46114458a6b"
+        "reference-overlay-sha256:0cc1fd8dcdb69d50098b81bad0ef91445a5936a07608afa6803c2fe9111fbd4a"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
@@ -611,7 +611,7 @@
       "transform_ids": [
         "codex-doc-reference-paths-v1",
         "codex-runtime-path-bridge-v1",
-        "reference-overlay-sha256:48229915a08d3eeaa8628ddd5e1611a0ca8fd808266831db29d2cdfe88034cee"
+        "reference-overlay-sha256:bea1778985f935f6cd4cc1af4028422de3aaab862514cfa086924a0afecc132e"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
