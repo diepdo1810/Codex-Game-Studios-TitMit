@@ -7135,7 +7135,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/smoke-check/references/1-detect-setup.md",
-      "target_sha256": "10d2bb2796fbd8b31a787bc73890066a86accc8159be398162f03e948cd71069",
+      "target_sha256": "64eef52a8630e267cfde1d7b74701ab16f6350ec05851195eda15fa34eba6657",
       "related_targets": []
     },
     {

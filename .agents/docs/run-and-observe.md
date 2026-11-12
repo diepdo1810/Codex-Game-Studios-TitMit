@@ -51,9 +51,32 @@ engine has a native way.
 
 | `engine.name` | Launch | Capture | Output lands in | Never use | Scaffold needed |
 |---|---|---|---|---|---|
+| Web / Browser | `npm run dev` for live play, or serve the built `dist/` | Playwright page screenshot at 1280x720 with captured console and page errors | `production/qa/evidence/[story-slug]/` | headless screenshot without inspecting output | running server and installed browser |
 | Godot 4 | `godot --path . --windowed --resolution 1280x720 <scene>.tscn` | `--write-movie <path>.png --quit-after <N>` | beside the given path, `<name>00000000.png` … | `--headless` | **none** |
 | Unity 6 | built player `.exe -screen-width 1280 -screen-height 720 -screen-fullscreen 0 --scene <Name>` | `ScreenCapture.CaptureScreenshot(<abs path>)` from a bootstrap script | the absolute path you pass | `-batchmode`, `-nographics` | one MonoBehaviour |
 | Unreal 5 | `MSYS_NO_PATHCONV=1 "<UE root>/Engine/Binaries/Win64/UnrealEditor.exe" "$(pwd -W 2>/dev/null || pwd)/<Game>.uproject" <MapURL> -game -windowed -ResX=1280 -ResY=720` | `HighResShot 1280x720 filename=<abs path>` console command | the path you pass (else `Saved/Screenshots/WindowsEditor/`) | `-nullrhi`, `-unattended` alone | one actor or `-ExecCmds` |
+
+### Web / Browser — real rendered frame
+
+For Vite/TypeScript browser games, start the project's actual `commands.run`
+(`npm run dev` for the pinned scaffold) and open its local URL in an installed
+browser or Playwright. Use the project's configured test runner, not a native
+editor. Capture a PNG of the real page at a fixed 1280×720 viewport, record any
+console errors or uncaught exceptions, and inspect the picture against the
+story's acceptance criteria. For example, when Playwright and a server are
+available, its screenshot CLI can capture the running page:
+
+```bash
+npx playwright screenshot --viewport-size="1280,720" http://127.0.0.1:5173 production/qa/evidence/[story-slug]/01-game.png
+```
+
+That is an example: take the actual server URL/port from the game's output
+and ensure the evidence folder exists; do not assume 5173 is free or that
+a browser was installed. Playwright test fixtures can additionally report
+page errors. A screenshot must be opened and assessed, not merely created;
+no image facility means visual evidence NOT ASSESSED. When testing touch
+controls, use a mobile viewport/device in addition to desktop. Do not
+substitute `tsc`, Vitest or `npm run build` for visual verification.
 
 ### Godot 4 — zero scaffold
 

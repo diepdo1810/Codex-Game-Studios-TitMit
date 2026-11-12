@@ -4707,7 +4707,7 @@
       "source": ".claude/skills/smoke-check/references/1-detect-setup.md",
       "source_sha256": "07af6a1dc13f17fddb6f1877e578969471ffa37e3e5b1845334ca216a36fdff3",
       "target": ".agents/skills/smoke-check/references/1-detect-setup.md",
-      "target_sha256": "10d2bb2796fbd8b31a787bc73890066a86accc8159be398162f03e948cd71069",
+      "target_sha256": "64eef52a8630e267cfde1d7b74701ab16f6350ec05851195eda15fa34eba6657",
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
