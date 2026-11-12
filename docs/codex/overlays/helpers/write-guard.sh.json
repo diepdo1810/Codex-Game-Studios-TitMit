@@ -1,0 +1,10 @@
+{
+  "source": ".claude/scripts/write-guard.sh",
+  "source_sha256": "c7ac4ccf0b7f13e2019391697b5933fee324675194bebf15cfe6e41f5e6d86ff",
+  "edits": [
+    {
+      "find": " project.yaml\n}\nENGINE=$(engine_name | tr 'A-Z' 'a-z')\ncase \"$ENGINE\" in\n  godot) ROOTS=\"src\" ;;\n  unity) ROOTS=\"Assets\" ;;\n  unreal) ROOTS=\"Source\" ;;\n  # Unse",
+      "replace": " project.yaml\n}\nENGINE=$(engine_name | tr 'A-Z' 'a-z')\ncase \"$ENGINE\" in\n  godot|web) ROOTS=\"src\" ;;\n  unity) ROOTS=\"Assets\" ;;\n  unreal) ROOTS=\"Source\" ;;\n  # Unse"
+    }
+  ]
+}

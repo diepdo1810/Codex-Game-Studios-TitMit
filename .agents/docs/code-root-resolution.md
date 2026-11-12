@@ -12,6 +12,7 @@ code. This file is the procedure for applying it.
 
 | `engine.name` | Code root | Why it cannot be `src/` |
 |---|---|---|
+| Web | `src/` (or detected project-specific source root) | Browser code is bundled from the game source; an existing project may use a different root |
 | Godot | `src/` | No constraint; Godot loads from `res://` anywhere under the project root |
 | Unity | `Assets/` | Unity compiles **only** `Assets/` and `Packages/` |
 | Unreal | `Source/<Module>/` | UnrealBuildTool discovers modules under `Source/`; content lives in `Content/` |

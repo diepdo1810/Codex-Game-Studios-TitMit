@@ -45,11 +45,12 @@
       "source": ".claude/docs/code-root-resolution.md",
       "source_sha256": "c992bb8e40822dbdb638b000c79a9313dca07d492c248072cac967b73351d4fc",
       "target": ".agents/docs/code-root-resolution.md",
-      "target_sha256": "9504dc8104b3aee7bb580f5036fffd6ac3320f3c4110b57072e4b769cf8f528e",
+      "target_sha256": "b49fea688860fb2a37a6dbcd2f015f2d6ffb42e2a959a0c30c8f12f9fd5b6314",
       "transform_version": 1,
       "transform_ids": [
         "codex-doc-reference-paths-v1",
-        "codex-runtime-path-bridge-v1"
+        "codex-runtime-path-bridge-v1",
+        "reference-overlay-sha256:30dcb1e83f63ed9f55a9cad1198d5caa7d9f504810768723e642cbbd7a2eb004"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
@@ -439,9 +440,11 @@
       "source": ".claude/docs/directory-structure.md",
       "source_sha256": "b7a84db3f2ee1ef57ea2a0ef1adfa53bb7b88b024c621a3661237e2ca4a2c31c",
       "target": ".agents/docs/directory-structure.md",
-      "target_sha256": "3606a0a779f68a82bbbd71d068ba6e0ca745e005698459cbf902768ac42823e2",
+      "target_sha256": "1264a8904f8d36f61bebe9cac42ec081ed616ea6e7d227108b880d8b12976d0d",
       "transform_version": 1,
-      "transform_ids": [],
+      "transform_ids": [
+        "reference-overlay-sha256:0cc1fd8dcdb69d50098b81bad0ef91445a5936a07608afa6803c2fe9111fbd4a"
+      ],
       "owner": "CGS-26",
       "ownership": "generated"
     },
@@ -603,11 +606,12 @@
       "source": ".claude/docs/run-and-observe.md",
       "source_sha256": "d84bf2ceb4b532fbc1a741ecd05cb50b1a463df54ef3e7faa6d79eaf6b7e1364",
       "target": ".agents/docs/run-and-observe.md",
-      "target_sha256": "a9d36f5b463ae48676aa69f9470368a1d220834405501b21adf54e71e2b0ae93",
+      "target_sha256": "b6f59b79477839422dbf056703d53629795b70aa39e955df55f5668ea3732b51",
       "transform_version": 1,
       "transform_ids": [
         "codex-doc-reference-paths-v1",
-        "codex-runtime-path-bridge-v1"
+        "codex-runtime-path-bridge-v1",
+        "reference-overlay-sha256:bea1778985f935f6cd4cc1af4028422de3aaab862514cfa086924a0afecc132e"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
@@ -1788,13 +1792,14 @@
       "source": ".claude/hooks/yaml-helper.sh",
       "source_sha256": "8299e656cb8afc49ec02b2e17e32b61f3df50b13b93a8544226e30e459f68424",
       "target": ".agents/hooks/yaml-helper.sh",
-      "target_sha256": "0aa911cde4d98fbbbb439ec6e0384734b6c70684deb1a26bc5295660aff0e177",
+      "target_sha256": "231d798556082022112599887d475f86a912b3842499530cdf2d8b575f489b55",
       "transform_version": 1,
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
         "neutral-project-env",
         "native-hook-root-markers-v1",
+        "helper-overlay-v2:f3fb39cd8e1c6e1f933636842f7d8897d357744bef97e220c464e61a05313442",
         "explicit-project-root"
       ],
       "owner": "CGS-25",
@@ -2345,12 +2350,13 @@
       "source": ".claude/scripts/project-coherence.sh",
       "source_sha256": "6b4da1aff42a3c653c2c532d4385f923667ec37d01546b57d1459d659ece3c3b",
       "target": ".agents/scripts/project-coherence.sh",
-      "target_sha256": "abfc266cdc2999ca05fb81209741571596652be8f35838749b514fbb188ac57b",
+      "target_sha256": "45f44477661659020c79ce90222854185125b9ee458399163f21f0f9331b9b8c",
       "transform_version": 1,
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:a48def5884ea0e4efe5bbdb9ab876ec9382163cca98658ced5a7b32c2615cd8d"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2360,12 +2366,13 @@
       "source": ".claude/scripts/project-state.sh",
       "source_sha256": "fce992b9762b6c70f549ec21f12e99c8bca3e17c57a49e6ece15c0cefe115d1a",
       "target": ".agents/scripts/project-state.sh",
-      "target_sha256": "b6e48a3c1d53d2e8321d94fa425db88bf5da3695530073593d8f7c06e6865b21",
+      "target_sha256": "1c73806e7197da9b9c32bd933a479b8bf41219b38a3eaff18d58881e39ef0967",
       "transform_version": 1,
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:c019f6e0fabb3248762a97e583b05fbc7f72bf221cfa51f9651dbdab83bd1dfb"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2527,12 +2534,13 @@
       "source": ".claude/scripts/test-run.sh",
       "source_sha256": "70d5f44707304f2cba93607f0b52e6747e25d6349d771c928dc1f31884a438b9",
       "target": ".agents/scripts/test-run.sh",
-      "target_sha256": "1a0db3af80a8a998733e9f30d7fc599a65a6296e1cf5624f7ccf0caea6053ce4",
+      "target_sha256": "e49b975befa3ea2d39ac3263aec1b28bb319b50d19287511f5c5d2073adf279c",
       "transform_version": 1,
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:ece8a6bca1e68d95f313e576513797a3686a56431e794c9784233f4d2404a2bd"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2557,12 +2565,13 @@
       "source": ".claude/scripts/write-guard.sh",
       "source_sha256": "c7ac4ccf0b7f13e2019391697b5933fee324675194bebf15cfe6e41f5e6d86ff",
       "target": ".agents/scripts/write-guard.sh",
-      "target_sha256": "880035eff3df80325a67210d2035ddaca67ab5ee9d923626fff8cecaca71a421",
+      "target_sha256": "e935f2e09bbf7303d6c7b1934e836c4d68ac12ff3904143da35ea792ab5e55cd",
       "transform_version": 1,
       "transform_ids": [
         "normalize-lf",
         "mirror-claude-paths",
-        "neutral-project-env"
+        "neutral-project-env",
+        "helper-overlay-v2:6c1671654252a43b61d3e5e7eaeb0084247eeb5af3a5835e1838bc899f632d58"
       ],
       "owner": "CGS-25",
       "ownership": "generated"
@@ -2821,7 +2830,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2835,7 +2844,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2849,7 +2858,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2863,7 +2872,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2873,11 +2882,11 @@
       "source": ".claude/skills/architecture-review/references/5-engine.md",
       "source_sha256": "6d48c267b83bca7de2fba89e7c57685277d2fa5c728a10dc6d01a6b876cd3939",
       "target": ".agents/skills/architecture-review/references/5-engine.md",
-      "target_sha256": "fe73c5c23470a53e6abdd6335e9db12a42863c0193aeb9c8e64245ab912c9695",
+      "target_sha256": "1047dcb77c4d89cc1d89334ee9943d39f7c81c05d704f1ed00ac33eef1ad5960",
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2891,7 +2900,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2905,7 +2914,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2919,7 +2928,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2933,7 +2942,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -2950,7 +2959,7 @@
         "explicit-bootstrap-v1",
         "codex-question-delegation-v1",
         "native-skill-invocation-v1",
-        "overlay-sha256:37d7a2c5dd4dd133733248b5a6f792d842bffe354fa4cd6583e631d615efca7c"
+        "overlay-sha256:cb10bc63ef346e48605e8c1881ca1b2d8bb000d4276fcecb4f1b224888abf220"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -3110,14 +3119,14 @@
       "source": ".claude/skills/code-review/SKILL.md",
       "source_sha256": "3468d605b4627e0568c80d0732d1ab1281652641f3dede555191657c40571b8c",
       "target": ".agents/skills/code-review/SKILL.md",
-      "target_sha256": "0a22d7c219b7d4ed6b8d259a5724a8fc28c1ac81eddbf57e9e517e98c6a877f2",
+      "target_sha256": "275fba47dafbeac8717e71beab3d583f5c298b84fe2a922503ec518ab199b978",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
         "explicit-bootstrap-v1",
         "codex-question-delegation-v1",
         "native-skill-invocation-v1",
-        "overlay-sha256:b57f945ae4708a8896693b888a780d4cc40b9a8d55dc6b002b7779825899fc00"
+        "overlay-sha256:4b3ba38ef97f5ff387acd825e04dc8785a47d8b7bec0718c6ff471f3f009287a"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4492,7 +4501,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4506,7 +4515,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4516,11 +4525,11 @@
       "source": ".claude/skills/setup-engine/references/2-guided-mode.md",
       "source_sha256": "77ef8e043ef536db796f3d32a78d960ecde7a8320caf568f30b7b93036128ffa",
       "target": ".agents/skills/setup-engine/references/2-guided-mode.md",
-      "target_sha256": "be176f2d4f14eef70299b56f9e4245386a26d5af447f038589a139c233a12ba4",
+      "target_sha256": "0ad54e85bce6b38b30b15624614815ecc7f442f593f52b9bbc91c236ac606390",
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4534,7 +4543,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4548,7 +4557,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4562,7 +4571,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4576,7 +4585,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4590,7 +4599,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4604,7 +4613,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4618,7 +4627,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4632,7 +4641,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4646,7 +4655,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4656,14 +4665,14 @@
       "source": ".claude/skills/setup-engine/SKILL.md",
       "source_sha256": "37c08d68ed58b70e6880e269e711e2617b89f2f165d9bba5d966e326e73e9a17",
       "target": ".agents/skills/setup-engine/SKILL.md",
-      "target_sha256": "fe54b384f4fc0edeab3fa7f9b697a28041b138996b741007c415b152ccf597b4",
+      "target_sha256": "9c8e3d49f356748085b5f0294ceed3206dbb3008e37250bc999c1dc43c04bb59",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
         "explicit-bootstrap-v1",
         "codex-question-delegation-v1",
         "native-skill-invocation-v1",
-        "overlay-sha256:74d091db91c4d8129aaf60a22392458d6b9b6715d7b4ec0b92da140decf450d1"
+        "overlay-sha256:034c87e1b7efb964a52d6f4eebcda2f1fc3ee4e9a225858044457f15e60f1102"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4707,11 +4716,11 @@
       "source": ".claude/skills/smoke-check/references/1-detect-setup.md",
       "source_sha256": "07af6a1dc13f17fddb6f1877e578969471ffa37e3e5b1845334ca216a36fdff3",
       "target": ".agents/skills/smoke-check/references/1-detect-setup.md",
-      "target_sha256": "10d2bb2796fbd8b31a787bc73890066a86accc8159be398162f03e948cd71069",
+      "target_sha256": "64eef52a8630e267cfde1d7b74701ab16f6350ec05851195eda15fa34eba6657",
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4721,11 +4730,11 @@
       "source": ".claude/skills/smoke-check/references/2-run-tests.md",
       "source_sha256": "93981f1b4aadeff6d3c8db199de990972e7a7d0540313e3cad4c74aaf52c9f62",
       "target": ".agents/skills/smoke-check/references/2-run-tests.md",
-      "target_sha256": "c5652468fbcbaa600c192282f6ef949ed6853a3c8c4827af8e4141353d1e4f35",
+      "target_sha256": "bea5e398c6d7063c12081f219ba1d9e07a4734df0edb5c95486b3840842e8c29",
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4739,7 +4748,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4753,7 +4762,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4767,7 +4776,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4781,7 +4790,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -4791,14 +4800,14 @@
       "source": ".claude/skills/smoke-check/SKILL.md",
       "source_sha256": "8531f6d673bf35704b2a0676594e3ab4d6af0153fe772ab590479247fddee6d0",
       "target": ".agents/skills/smoke-check/SKILL.md",
-      "target_sha256": "86759811a016c7d0ca43e644e323079a604058e42c9e0c8acd806e2f6c46b032",
+      "target_sha256": "5bd9dfd474e4c7d5530888a73fffa99b8469e210d49a34c70531b52aa9823791",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
         "explicit-bootstrap-v1",
         "codex-question-delegation-v1",
         "native-skill-invocation-v1",
-        "overlay-sha256:deaebce3a582739af9ef2389a10f68c58dfde9c5538f7f15eff8027045c3ac53"
+        "overlay-sha256:fc410e7f4fbafd9e49f856d621d464e085e26e9d42a0ebc2f97c04321c3fb35c"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5232,7 +5241,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5246,7 +5255,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5260,7 +5269,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5274,7 +5283,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5288,7 +5297,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5302,7 +5311,7 @@
       "transform_version": 1,
       "transform_ids": [
         "resource-runtime-adaptation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"
@@ -5312,14 +5321,14 @@
       "source": ".claude/skills/test-setup/SKILL.md",
       "source_sha256": "7d420f14829ba4062dcaf354a91808e41523c091516160593bac048533679973",
       "target": ".agents/skills/test-setup/SKILL.md",
-      "target_sha256": "16e9f1a6e5d3cefe21a09806f85ee29c1fa1d9e73b41182d868dd5e934d83a48",
+      "target_sha256": "e088c5d03b7ce43a90d7249bc6e66e681d0927f8b7bfe2cb23c8f98af9d3baef",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
         "explicit-bootstrap-v1",
         "codex-question-delegation-v1",
         "native-skill-invocation-v1",
-        "overlay-sha256:9b9053881bba3cacb5a5a592019bd5023e1a38721bb8449c6dfe02502dac6e29"
+        "overlay-sha256:cb23406128a0ecf2aba424c4bb1c9cd966e58bf6f07ed242a032bbf0d4c76487"
       ],
       "owner": "CGS-05",
       "ownership": "generated"

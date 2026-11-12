@@ -972,7 +972,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-26",
       "target": ".agents/docs/code-root-resolution.md",
-      "target_sha256": "9504dc8104b3aee7bb580f5036fffd6ac3320f3c4110b57072e4b769cf8f528e",
+      "target_sha256": "b49fea688860fb2a37a6dbcd2f015f2d6ffb42e2a959a0c30c8f12f9fd5b6314",
       "related_targets": []
     },
     {
@@ -1588,7 +1588,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-26",
       "target": ".agents/docs/directory-structure.md",
-      "target_sha256": "3606a0a779f68a82bbbd71d068ba6e0ca745e005698459cbf902768ac42823e2",
+      "target_sha256": "1264a8904f8d36f61bebe9cac42ec081ed616ea6e7d227108b880d8b12976d0d",
       "related_targets": []
     },
     {
@@ -1822,7 +1822,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-26",
       "target": ".agents/docs/run-and-observe.md",
-      "target_sha256": "a9d36f5b463ae48676aa69f9470368a1d220834405501b21adf54e71e2b0ae93",
+      "target_sha256": "b6f59b79477839422dbf056703d53629795b70aa39e955df55f5668ea3732b51",
       "related_targets": []
     },
     {
@@ -3571,7 +3571,7 @@
       "verification": "Preserved source-bound backend and tested adapter equivalent; see per-declaration protocol/limits in parity matrix. Native activation and Linux remain PENDING.",
       "status": "EQUIVALENT",
       "target": ".agents/hooks/yaml-helper.sh",
-      "target_sha256": "0aa911cde4d98fbbbb439ec6e0384734b6c70684deb1a26bc5295660aff0e177",
+      "target_sha256": "231d798556082022112599887d475f86a912b3842499530cdf2d8b575f489b55",
       "task": "CGS-24"
     },
     {
@@ -4154,7 +4154,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-28",
       "target": ".agents/scripts/project-coherence.sh",
-      "target_sha256": "abfc266cdc2999ca05fb81209741571596652be8f35838749b514fbb188ac57b",
+      "target_sha256": "45f44477661659020c79ce90222854185125b9ee458399163f21f0f9331b9b8c",
       "related_targets": []
     },
     {
@@ -4171,7 +4171,7 @@
       "verification": "Actual focused helper fixtures and source-preserving adaptations checked. test-run ladder fixtures are synthetic, not engine execution; all other limits are explicit in helper inventory.",
       "status": "PORTED",
       "target": ".agents/scripts/project-state.sh",
-      "target_sha256": "b6e48a3c1d53d2e8321d94fa425db88bf5da3695530073593d8f7c06e6865b21"
+      "target_sha256": "1c73806e7197da9b9c32bd933a479b8bf41219b38a3eaff18d58881e39ef0967"
     },
     {
       "id": "file:.claude/scripts/read-guard.sh",
@@ -4353,7 +4353,7 @@
       "verification": "Actual focused helper fixtures and source-preserving adaptations checked. test-run ladder fixtures are synthetic, not engine execution; all other limits are explicit in helper inventory.",
       "status": "PORTED",
       "target": ".agents/scripts/test-run.sh",
-      "target_sha256": "1a0db3af80a8a998733e9f30d7fc599a65a6296e1cf5624f7ccf0caea6053ce4"
+      "target_sha256": "e49b975befa3ea2d39ac3263aec1b28bb319b50d19287511f5c5d2073adf279c"
     },
     {
       "id": "file:.claude/scripts/test-scaffold.sh",
@@ -4387,7 +4387,7 @@
       "verification": "Actual focused helper fixtures and source-preserving adaptations checked. test-run ladder fixtures are synthetic, not engine execution; all other limits are explicit in helper inventory.",
       "status": "PORTED",
       "target": ".agents/scripts/write-guard.sh",
-      "target_sha256": "880035eff3df80325a67210d2035ddaca67ab5ee9d923626fff8cecaca71a421"
+      "target_sha256": "e935f2e09bbf7303d6c7b1934e836c4d68ac12ff3904143da35ea792ab5e55cd"
     },
     {
       "id": "file:.claude/scripts/yaml-get.awk",
@@ -4829,7 +4829,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-13",
       "target": ".agents/skills/architecture-review/references/5-engine.md",
-      "target_sha256": "fe73c5c23470a53e6abdd6335e9db12a42863c0193aeb9c8e64245ab912c9695",
+      "target_sha256": "1047dcb77c4d89cc1d89334ee9943d39f7c81c05d704f1ed00ac33eef1ad5960",
       "related_targets": []
     },
     {
@@ -5114,7 +5114,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-15",
       "target": ".agents/skills/code-review/SKILL.md",
-      "target_sha256": "0a22d7c219b7d4ed6b8d259a5724a8fc28c1ac81eddbf57e9e517e98c6a877f2",
+      "target_sha256": "275fba47dafbeac8717e71beab3d583f5c298b84fe2a922503ec518ab199b978",
       "related_targets": []
     },
     {
@@ -6835,7 +6835,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-10",
       "target": ".agents/skills/setup-engine/SKILL.md",
-      "target_sha256": "fe54b384f4fc0edeab3fa7f9b697a28041b138996b741007c415b152ccf597b4",
+      "target_sha256": "9c8e3d49f356748085b5f0294ceed3206dbb3008e37250bc999c1dc43c04bb59",
       "related_targets": []
     },
     {
@@ -6889,7 +6889,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-10",
       "target": ".agents/skills/setup-engine/references/2-guided-mode.md",
-      "target_sha256": "be176f2d4f14eef70299b56f9e4245386a26d5af447f038589a139c233a12ba4",
+      "target_sha256": "0ad54e85bce6b38b30b15624614815ecc7f442f593f52b9bbc91c236ac606390",
       "related_targets": []
     },
     {
@@ -7117,7 +7117,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/smoke-check/SKILL.md",
-      "target_sha256": "86759811a016c7d0ca43e644e323079a604058e42c9e0c8acd806e2f6c46b032",
+      "target_sha256": "5bd9dfd474e4c7d5530888a73fffa99b8469e210d49a34c70531b52aa9823791",
       "related_targets": []
     },
     {
@@ -7135,7 +7135,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/smoke-check/references/1-detect-setup.md",
-      "target_sha256": "10d2bb2796fbd8b31a787bc73890066a86accc8159be398162f03e948cd71069",
+      "target_sha256": "64eef52a8630e267cfde1d7b74701ab16f6350ec05851195eda15fa34eba6657",
       "related_targets": []
     },
     {
@@ -7153,7 +7153,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/smoke-check/references/2-run-tests.md",
-      "target_sha256": "c5652468fbcbaa600c192282f6ef949ed6853a3c8c4827af8e4141353d1e4f35",
+      "target_sha256": "bea5e398c6d7063c12081f219ba1d9e07a4734df0edb5c95486b3840842e8c29",
       "related_targets": []
     },
     {
@@ -7775,7 +7775,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/test-setup/SKILL.md",
-      "target_sha256": "16e9f1a6e5d3cefe21a09806f85ee29c1fa1d9e73b41182d868dd5e934d83a48",
+      "target_sha256": "e088c5d03b7ce43a90d7249bc6e66e681d0927f8b7bfe2cb23c8f98af9d3baef",
       "related_targets": []
     },
     {

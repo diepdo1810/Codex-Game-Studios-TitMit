@@ -544,7 +544,7 @@ team.size::individual|small|studio
 performance.enforce::warn|block|off
 platform.cert_tier::none|itch|steam|console
 accessibility.target::none|standard|aaa
-engine.name::Godot|Unity|Unreal
+engine.name::Godot|Unity|Unreal|Web
 project.stage::Concept|Systems Design|Technical Setup|Pre-Production|Production|Polish|Release
 testing.strict.logic::true|false
 testing.strict.integration::true|false
@@ -1468,6 +1468,29 @@ resolve_code_root() {
 
   case "$(printf '%s' "$ename" | tr '[:upper:]' '[:lower:]')" in
     godot)   root="src" ;;
+    web)
+      root="src"
+      # Existing Web games may declare an explicit relative source root.
+      # Never silently scan another engine root or invent a missing path.
+      local web_root=""
+      web_root=$(resolve_setting engine.code_root)
+      web_root=${web_root%%$'\t'*}
+      if [ -n "$web_root" ]; then
+        case "$web_root" in
+          /*|*\\*|.|..|../*|*/..|*/../*|*/./*|./*)
+            root=""; src="" ;;
+          *)
+            if [ -d "$_YH_ROOT/$web_root" ]; then
+              root="$web_root"; src="engine.code_root"
+            else
+              root=""; src=""
+            fi
+            ;;
+        esac
+      elif [ -f "$_YH_ROOT/package.json" ] && [ ! -d "$_YH_ROOT/src" ]; then
+        root=""; src=""
+      fi
+      ;;
     unity)   root="Assets" ;;
     unreal*) root="Source" ;;
     *)       root="" ;;
@@ -1478,7 +1501,7 @@ resolve_code_root() {
   #    is also true for Godot's own `assets/` on a case-insensitive filesystem
   #    (Windows, default macOS), which made src/ + assets/ "ambiguous" and a lone
   #    assets/ a Unity project.
-  if [ -z "$root" ]; then
+  if [ -z "$root" ] && [ "$(printf '%s' "$ename" | tr '[:upper:]' '[:lower:]')" != web ]; then
     for d in "$_YH_ROOT"/*/; do
       d="${d%/}"; d="${d##*/}"
       case "$d" in src|Assets|Source) found="$d"; n=$((n + 1)) ;; esac

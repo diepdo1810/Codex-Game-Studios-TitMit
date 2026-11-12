@@ -13,6 +13,11 @@
       "target": "references/3-traceability.md",
       "find": "- COVERED: [N] — requirements with ADR + story + passing test",
       "replace": "- COVERED: [N] — requirements with ADR + story + an existing linked test file; passing execution requires separate observed test evidence"
+    },
+    {
+      "find": " (Godot→`godot-specialist`, Unity→`unity-specialist`, Unreal→`unreal-specialist`); if `engine.name` is absent or empty, read the Primary line of the `## Engine ",
+      "replace": " (Godot→`godot-specialist`, Unity→`unity-specialist`, Unreal→`unreal-specialist`, Web→`lead-programmer`); if `engine.name` is absent or empty, read the Primary line of the `## Engine ",
+      "target": "references/5-engine.md"
     }
   ]
 }

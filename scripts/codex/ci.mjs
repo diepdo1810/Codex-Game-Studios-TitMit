@@ -4,11 +4,21 @@ const args=process.argv.slice(2);if(args.some(x=>x!=='--skip-reconcile')||args.f
 const inv=JSON.parse(readFileSync('docs/codex/upstream-inventory.json','utf8'));
 const roles=inv.files.filter(x=>x.category==='agent').map(x=>x.path.split('/').at(-1).replace(/\.md$/,'')).sort();
 if(roles.length!==inv.counts.agent||new Set(roles).size!==roles.length)throw Error('Role count or uniqueness mismatch');
+// A GitHub template repository lacks the original source Git object unless fetched.
+const pinned=spawnSync('git',['cat-file','-e',inv.source_commit+'^{commit}'],{cwd:process.cwd(),encoding:'utf8'});
+if(pinned.status!==0){
+  console.error('PENDING pinned upstream source Git object: '+inv.source_commit);
+  console.error('Fetch it once before full CI:');
+  console.error('git fetch --no-tags --depth=1 https://github.com/Donchitos/Claude-Code-Game-Studios.git 05ad7c8a5b8aa2aa86bbd3439ae7cf7295cac418:refs/heads/source/ccgs-main');
+  process.exit(1);
+}
 const tasks=[
  ['validator',['scripts/codex/validate.mjs']],
  ['hygiene regression',['tests/hygiene.mjs']],
  ['engine CLI regression',['tests/engine-cli.mjs']],
  ['code-root configuration regression',['tests/code-root.mjs']],
+ ['Web scaffold and safety regression',['tests/web-engine.mjs']],
+ ['Web reference overlay regression',['tests/reference-overlays.mjs']],
  ['CLI filesystem alias regression',['scripts/codex/tests/cli-alias.mjs']],
  ['repository hygiene',['scripts/codex/hygiene.mjs']],
  ['Git source fixture',['scripts/codex/tests/source-fixture.mjs']],

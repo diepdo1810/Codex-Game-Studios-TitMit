@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,writeFileSync,rmSync,realpathSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,realpathSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
@@ -10,14 +10,24 @@ function fixture(name,shared,local,dirs=[],legacy=''){
  const root=path.join(temp,name);mkdirSync(root);
  if(shared!==null)writeFileSync(path.join(root,'project.yaml'),shared);
  if(local!==null)writeFileSync(path.join(root,'project.local.yaml'),local);
- for(const dir of dirs)mkdirSync(path.join(root,dir));
+ for(const dir of dirs)mkdirSync(path.join(root,dir),{recursive:true});
  if(legacy){mkdirSync(path.join(root,'.agents/docs'),{recursive:true});writeFileSync(path.join(root,'.agents/docs/technical-preferences.md'),legacy)}
  return root;
 }
+const shellSource=readFileSync(helper,'utf8');
+for(const signature of ['resolve_code_root() {','get_yaml_child_keys() {','hook_warn() {']){
+ assert.equal(shellSource.split(signature).length-1,1,'Duplicate or missing helper: '+signature);
+}
+assert.ok(shellSource.endsWith('  exit 0\nfi\n'),'yaml-helper.sh has unexpected trailing content');
+const syntax=spawnSync(bashPath(),['-n',helper],{encoding:'utf8'});
+assert.equal(syntax.status,0,'yaml-helper.sh Bash syntax invalid: '+syntax.stderr);
 function selected(root){const r=spawnSync(bashPath(),['-c','source "$1"; resolve_code_root','fixture',helper],{cwd:root,encoding:'utf8',env:{...process.env,CGS_PROJECT_DIR:root}});assert.equal(r.status,0,r.stderr);return r.stdout}
 try{
  assert.equal(selected(fixture('locked','engine:\n  name: Unity\n','engine:\n  name: Godot\n')), 'Assets\tengine.name');
  assert.equal(selected(fixture('shared-only','engine:\n  name: Godot\n',null)), 'src\tengine.name');
+ assert.equal(selected(fixture('web','engine:\n  name: Web\n',null)), 'src\tengine.name');
+ assert.equal(selected(fixture('web-existing','engine:\n  name: Web\n  code_root: app/src\n',null,['app/src'])), 'app/src\tengine.code_root');
+ assert.equal(selected(fixture('web-missing','engine:\n  name: Web\n  code_root: missing\n',null,['src'])), '\tunset');
  assert.equal(selected(fixture('local-only',null,'engine:\n  name: Godot\n',['Source'])), 'Source\tdetected');
  assert.equal(selected(fixture('invalid','engine:\n  name: Bogus\n','engine:\n  name: Godot\n',[],'Engine: Unity 6\n')), 'Assets\t.agents/docs/technical-preferences.md');
  assert.equal(selected(fixture('undecidable',null,'engine:\n  name: Godot\n')), '\tunset');

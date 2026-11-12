@@ -26,6 +26,9 @@ Homebrew's `coreutils` (same exit 124), or, with nothing installed,
 a FAILURE the same way. Then read the result for the engine. On every engine
 one outcome looks like success and is not; each is named below.
 
+**Web (Vite/TypeScript)** — use the project's package manager and its real scripts.
+For a scaffolded npm project, execute `bash .agents/scripts/test-run.sh web --root .` (or `npm test` in the game root), then `npm run smoke` for the Playwright browser boot path. The helper reports `web:no-project`, `web:no-test-script`, `web:no-dependencies` and `web:no-browser` as NOT ASSESSED; never treat missing tests or a missing browser as PASS. Record actual exit codes. If an existing project uses pnpm/yarn/bun or a different runner, use its declared command and report unavailable checks individually. Run `npm run build` and inspect a screenshot for visible changes. A unit-test pass is not a visual pass.
+
 **Godot 4** — first check that `addons/gdUnit4/bin/GdUnitCmdTool.gd` exists —
 the folder has a **capital U**. If it does not, report
 `NOT ASSESSED — gdUnit4 not installed at addons/gdUnit4/` instead of running

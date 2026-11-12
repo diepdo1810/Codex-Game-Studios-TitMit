@@ -1,0 +1,10 @@
+{
+  "source": ".claude/scripts/project-coherence.sh",
+  "source_sha256": "6b4da1aff42a3c653c2c532d4385f923667ec37d01546b57d1459d659ece3c3b",
+  "edits": [
+    {
+      "find": "GINE\" | tr 'A-Z' 'a-z')\"\nVERFILE=\"docs/engine-reference/$ENGINE_LC/VERSION.md\"\n\n# --- 1. VERSION.md carries a recorded installed-version probe -----------------",
+      "replace": "GINE\" | tr 'A-Z' 'a-z')\"\nVERFILE=\"docs/engine-reference/$ENGINE_LC/VERSION.md\"\n\nif [ \"$ENGINE_LC\" = web ]; then\n  # Web is a toolchain, not an editor binary. Do not compare Vite's version to\n  # the generic native Engine Version row or report a nonexistent \"Web binary\".\n  if [ ! -f package.json ]; then\n    skipped \"Web package.json not found — source and build cannot be checked\"\n    summarise\n  fi\n  if ! command -v node >/dev/null 2>&1; then\n    skipped \"Web toolchain — Node.js not available to inspect package.json\"\n    summarise\n  fi\n  declared=$(node -e 'try { const p=require(\"./package.json\"); console.log(p.devDependencies?.vite || p.dependencies?.vite || \"-\") }catch { process.exit(1) }' 2>/dev/null)\n  if [ -z \"$declared\" ]; then\n    differs \"package.json cannot be parsed by Node.js\"\n  elif [ \"$declared\" = \"-\" ]; then\n    skipped \"Vite version — project uses another bundler or no Vite dependency\"\n  elif [ -n \"$VERSION\" ] && [ \"$VERSION\" = \"$declared\" ]; then\n    match \"Web bundler version in project.yaml ($VERSION) equals package.json ($declared)\"\n  elif [ -n \"$VERSION\" ]; then\n    differs \"Web engine.version ($VERSION) differs from declared Vite dependency ($declared). Resolve against the project lockfile.\"\n  else\n    skipped \"Web bundler version — project.yaml has no engine.version\"\n  fi\n  match \"Web project has package.json (this is not a build or test execution)\"\n  skipped \"Web runtime verification requires npm/pnpm/yarn/bun build, test and browser screenshot; not executed by project-coherence\"\n  summarise\nfi\n\n# --- 1. VERSION.md carries a recorded installed-version probe -----------------"
+    }
+  ]
+}

@@ -7,6 +7,32 @@
 
 Before running anything, understand the environment:
 
+**Web-specific detection (when `engine.name: Web`).** Web is a browser
+toolchain, not a native-editor executable. Keep the shared config-coherence,
+CI and QA-plan steps below, but replace the native engine/editor check with
+`node --version`, `package.json`, the recorded package manager and the
+actual `scripts.test` / `scripts.smoke` values. Never demand a Godot,
+Unity or Unreal binary for Web.
+
+Look for runnable game tests according to the **project's own test config**;
+the pinned scaffold uses `tests/unit/**/*.test.ts` (Vitest) and
+`tests/integration/**/*.spec.ts` (Playwright). Existing projects may use
+`*.test.tsx`, `*.spec.js` or another test root. Do not count Markdown
+checklists, empty directories or the toolkit's `.agents/engines/web/scaffold/`
+as game test evidence. If no executable test exists, report NOT ASSESSED for
+standard/full QA rather than a false PASS; at minimal QA follow the build +
+browser-launch requirement. Use `bash .agents/scripts/test-run.sh web --root .`
+to observe the npm test runner, `npm run smoke` only if declared, and
+`npm run build` for compile/build; do not install packages without consent.
+A missing browser leaves the visual check NOT ASSESSED even if unit tests pass.
+
+The Web environment line should report `Node / package manager / browser`,
+not an editor executable. Check an actual browser screenshot and console errors
+before calling a player-visible change verified. Unrun tests and browser checks
+must remain explicitly NOT ASSESSED.
+
+
+
 0. **Config coherence**: run `bash .agents/scripts/project-coherence.sh`.
 
    It compares what `project.yaml` declares against the real project file, the
