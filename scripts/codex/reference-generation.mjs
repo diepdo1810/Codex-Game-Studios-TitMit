@@ -3,6 +3,9 @@
 import { execFileSync } from 'node:child_process';
 import { isMainEntry } from './main-entry.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { existsSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { safeProjectPath } from './safe-path.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { openSource } from './source.mjs';
@@ -61,7 +64,21 @@ export async function referenceTargets({ root = ROOT, source: gitSource = openSo
       content = PATH_BRIDGE + content;
       transform_ids.push('codex-runtime-path-bridge-v1');
     }
-    const relative = source.replace(/^\.claude\/docs\//, '');
+    const relative = source.replace(/^\\.claude\\/docs\\//, '');
+    content = content.endsWith('\\n') ? content : content + '\\n';
+    const overlayFile = safeProjectPath(root, 'docs/codex/overlays/reference/' + relative + '.json');
+    if (existsSync(overlayFile)) {
+      const raw = readFileSync(overlayFile);
+      const overlay = JSON.parse(raw.toString('utf8'));
+      const actualSource = createHash('sha256').update(bytes).digest('hex');
+      if (overlay.source !== source || overlay.source_sha256 !== actualSource || !Array.isArray(overlay.edits) || !overlay.edits.length) throw Error('Invalid reference overlay: ' + source);
+      for (const edit of overlay.edits) {
+        if (typeof edit.find !== 'string' || !edit.find || typeof edit.replace !== 'string' || content.split(edit.find).length !== 2) throw Error('Reference overlay anchor mismatch: ' + source);
+        // Callback keeps Bash $'...' and other dollar sequences literal.
+        content = content.replace(edit.find, () => edit.replace);
+      }
+      transform_ids.push('reference-overlay-sha256:' + createHash('sha256').update(raw).digest('hex'));
+    }
     plans.push({
       source,
       target: `.agents/docs/${relative}`,

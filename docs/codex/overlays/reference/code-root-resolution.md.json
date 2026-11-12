@@ -1,0 +1,10 @@
+{
+  "source": ".claude/docs/code-root-resolution.md",
+  "source_sha256": "c992bb8e40822dbdb638b000c79a9313dca07d492c248072cac967b73351d4fc",
+  "edits": [
+    {
+      "find": " roots\n\n| `engine.name` | Code root | Why it cannot be `src/` |\n|---|---|---|\n| Godot | `src/` | No constraint; Godot loads from `res://` anywhere under the pro",
+      "replace": " roots\n\n| `engine.name` | Code root | Why it cannot be `src/` |\n|---|---|---|\n| Web | `src/` (or detected project-specific source root) | Browser code is bundled from the game source; an existing project may use a different root |\n| Godot | `src/` | No constraint; Godot loads from `res://` anywhere under the pro"
+    }
+  ]
+}

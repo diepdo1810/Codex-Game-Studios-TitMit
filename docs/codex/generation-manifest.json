@@ -49,7 +49,8 @@
       "transform_version": 1,
       "transform_ids": [
         "codex-doc-reference-paths-v1",
-        "codex-runtime-path-bridge-v1"
+        "codex-runtime-path-bridge-v1",
+        "reference-overlay-sha256:b9fcf255d7b7429e2a4176fe63bac90d9e6b7176f0b54fdb15fd4550c7288eb9"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
@@ -441,7 +442,9 @@
       "target": ".agents/docs/directory-structure.md",
       "target_sha256": "1264a8904f8d36f61bebe9cac42ec081ed616ea6e7d227108b880d8b12976d0d",
       "transform_version": 1,
-      "transform_ids": [],
+      "transform_ids": [
+        "reference-overlay-sha256:41687dce768b1fb5daef5e846c176117d44546d8d1813a5b06f3d46114458a6b"
+      ],
       "owner": "CGS-26",
       "ownership": "generated"
     },
@@ -607,7 +610,8 @@
       "transform_version": 1,
       "transform_ids": [
         "codex-doc-reference-paths-v1",
-        "codex-runtime-path-bridge-v1"
+        "codex-runtime-path-bridge-v1",
+        "reference-overlay-sha256:48229915a08d3eeaa8628ddd5e1611a0ca8fd808266831db29d2cdfe88034cee"
       ],
       "owner": "CGS-26",
       "ownership": "generated"
