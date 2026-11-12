@@ -184,7 +184,7 @@ fi
 
 # --- files --------------------------------------------------------------------
 # Source files, outside the folders a project does not write by hand.
-PRUNE='-name node_modules -o -name .git -o -name dist -o -name dist-single -o -name build -o -name .claude -o -name coverage -o -name .cache -o -name production -o -name docs -o -name design'
+PRUNE='-name node_modules -o -name .git -o -name dist -o -name dist-single -o -name build -o -name .claude -o -name .agents -o -name coverage -o -name .cache -o -name production -o -name docs -o -name design'
 SRCF=$(eval "find . \\( $PRUNE \\) -prune -o -type f \\( -name '*.js' -o -name '*.mjs' -o -name '*.ts' -o -name '*.tsx' -o -name '*.jsx' \\) -print" 2>/dev/null | sed 's|^\./||')
 TESTPAT='(^|/)[^/]*\.(test|spec)\.[a-z]+$'
 # An exact name match: `[ -d src ]` is also true for SRC/ on Windows and macOS.
