@@ -972,7 +972,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-26",
       "target": ".agents/docs/code-root-resolution.md",
-      "target_sha256": "9504dc8104b3aee7bb580f5036fffd6ac3320f3c4110b57072e4b769cf8f528e",
+      "target_sha256": "b49fea688860fb2a37a6dbcd2f015f2d6ffb42e2a959a0c30c8f12f9fd5b6314",
       "related_targets": []
     },
     {
@@ -1588,7 +1588,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-26",
       "target": ".agents/docs/directory-structure.md",
-      "target_sha256": "3606a0a779f68a82bbbd71d068ba6e0ca745e005698459cbf902768ac42823e2",
+      "target_sha256": "1264a8904f8d36f61bebe9cac42ec081ed616ea6e7d227108b880d8b12976d0d",
       "related_targets": []
     },
     {
@@ -1822,7 +1822,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-26",
       "target": ".agents/docs/run-and-observe.md",
-      "target_sha256": "a9d36f5b463ae48676aa69f9470368a1d220834405501b21adf54e71e2b0ae93",
+      "target_sha256": "b6f59b79477839422dbf056703d53629795b70aa39e955df55f5668ea3732b51",
       "related_targets": []
     },
     {
@@ -3571,7 +3571,7 @@
       "verification": "Preserved source-bound backend and tested adapter equivalent; see per-declaration protocol/limits in parity matrix. Native activation and Linux remain PENDING.",
       "status": "EQUIVALENT",
       "target": ".agents/hooks/yaml-helper.sh",
-      "target_sha256": "0aa911cde4d98fbbbb439ec6e0384734b6c70684deb1a26bc5295660aff0e177",
+      "target_sha256": "1b12f5f17250d7fbe70bb2ace5d88895522f1bba5c698293d671ccb18ba6a74f",
       "task": "CGS-24"
     },
     {
@@ -4154,7 +4154,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-28",
       "target": ".agents/scripts/project-coherence.sh",
-      "target_sha256": "abfc266cdc2999ca05fb81209741571596652be8f35838749b514fbb188ac57b",
+      "target_sha256": "45f44477661659020c79ce90222854185125b9ee458399163f21f0f9331b9b8c",
       "related_targets": []
     },
     {
@@ -4171,7 +4171,7 @@
       "verification": "Actual focused helper fixtures and source-preserving adaptations checked. test-run ladder fixtures are synthetic, not engine execution; all other limits are explicit in helper inventory.",
       "status": "PORTED",
       "target": ".agents/scripts/project-state.sh",
-      "target_sha256": "b6e48a3c1d53d2e8321d94fa425db88bf5da3695530073593d8f7c06e6865b21"
+      "target_sha256": "1c73806e7197da9b9c32bd933a479b8bf41219b38a3eaff18d58881e39ef0967"
     },
     {
       "id": "file:.claude/scripts/read-guard.sh",
@@ -4353,7 +4353,7 @@
       "verification": "Actual focused helper fixtures and source-preserving adaptations checked. test-run ladder fixtures are synthetic, not engine execution; all other limits are explicit in helper inventory.",
       "status": "PORTED",
       "target": ".agents/scripts/test-run.sh",
-      "target_sha256": "1a0db3af80a8a998733e9f30d7fc599a65a6296e1cf5624f7ccf0caea6053ce4"
+      "target_sha256": "e49b975befa3ea2d39ac3263aec1b28bb319b50d19287511f5c5d2073adf279c"
     },
     {
       "id": "file:.claude/scripts/test-scaffold.sh",
@@ -4387,7 +4387,7 @@
       "verification": "Actual focused helper fixtures and source-preserving adaptations checked. test-run ladder fixtures are synthetic, not engine execution; all other limits are explicit in helper inventory.",
       "status": "PORTED",
       "target": ".agents/scripts/write-guard.sh",
-      "target_sha256": "880035eff3df80325a67210d2035ddaca67ab5ee9d923626fff8cecaca71a421"
+      "target_sha256": "e935f2e09bbf7303d6c7b1934e836c4d68ac12ff3904143da35ea792ab5e55cd"
     },
     {
       "id": "file:.claude/scripts/yaml-get.awk",
