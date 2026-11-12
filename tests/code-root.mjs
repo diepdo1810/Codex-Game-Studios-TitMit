@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdtempSync,mkdirSync,writeFileSync,rmSync,realpathSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,realpathSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
@@ -14,6 +14,11 @@ function fixture(name,shared,local,dirs=[],legacy=''){
  if(legacy){mkdirSync(path.join(root,'.agents/docs'),{recursive:true});writeFileSync(path.join(root,'.agents/docs/technical-preferences.md'),legacy)}
  return root;
 }
+const shellSource=readFileSync(helper,'utf8');
+for(const signature of ['resolve_code_root() {','get_yaml_child_keys() {','hook_warn() {']){
+ assert.equal(shellSource.split(signature).length-1,1,'Duplicate or missing helper: '+signature);
+}
+assert.ok(shellSource.endsWith('  exit 0\nfi\n'),'yaml-helper.sh has unexpected trailing content');
 const syntax=spawnSync(bashPath(),['-n',helper],{encoding:'utf8'});
 assert.equal(syntax.status,0,'yaml-helper.sh Bash syntax invalid: '+syntax.stderr);
 function selected(root){const r=spawnSync(bashPath(),['-c','source "$1"; resolve_code_root','fixture',helper],{cwd:root,encoding:'utf8',env:{...process.env,CGS_PROJECT_DIR:root}});assert.equal(r.status,0,r.stderr);return r.stdout}
