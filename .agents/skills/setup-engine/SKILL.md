@@ -35,6 +35,7 @@ Four modes:
 
 - **Full spec**: `$setup-engine godot 4.7` — engine and version provided
 - **Engine only**: `$setup-engine unity` — engine provided, version will be looked up
+- **Web**: `$setup-engine web` — a browser game with TypeScript and Vite. Read and follow `docs/engine-reference/web/SETUP.md` immediately. This Web-specific path replaces Sections 2–9 (including 5.5) and keeps the Section 12 summary. Preserve existing web projects and request authorization before scaffolding or installing packages.
 - **No args**: `$setup-engine` — fully guided mode (engine recommendation + version)
 - **Refresh**: `$setup-engine refresh` — update reference docs (see Section 10)
 - **Upgrade**: `$setup-engine upgrade [old-version] [new-version]` — migrate to a new engine version (see Section 11)

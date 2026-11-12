@@ -37,7 +37,7 @@ mode) and Read those ranges with offset and limit:
 
 **Question 1 — Prior experience** (ask this first, always, via `available user-question tool (or ask in plain text and wait)`):
 - Prompt: "Have you worked in any of these engines before?"
-- Options: `Godot` / `Unity` / `Unreal Engine 5` / `Multiple — I'll explain` / `None of them`
+- Options: `Web (Canvas, Phaser, PixiJS, Three.js)` / `Godot` / `Unity` / `Unreal Engine 5` / `Multiple — I'll explain` / `None of them`
 - If they pick a specific engine → recommend that engine. Prior experience outweighs all other factors. Confirm with them and skip the matrix.
 - If "None" or "Multiple" → continue to the questions below.
 
@@ -49,7 +49,7 @@ mode) and Read those ranges with offset and limit:
 - Platform rules that feed directly into the recommendation:
   - Mobile → Unity strongly preferred; Unreal is a poor fit; Godot is viable for simple mobile
   - Console → Unity or Unreal; Godot console support requires third-party publishers or significant extra work
-  - Web → Godot exports cleanly to web; Unity WebGL is functional; Unreal has poor web support
+  - Web → Recommend the native Web toolchain (Vite and TypeScript; Canvas 2D, Phaser, PixiJS or Three.js) for browser-first games. Godot web export is an alternative; Unity WebGL is heavier; Unreal is not browser-first. See `docs/engine-reference/web/SETUP.md`.
   - PC only → all engines viable; other factors decide
   - Multiple → Unity is the most portable across PC/mobile/console
 
@@ -64,6 +64,9 @@ mode) and Read those ranges with offset and limit:
 Do NOT use a simple scoring matrix that eliminates engines. Instead, reason through the user's profile against the honest tradeoffs below, then present 1-2 recommendations with full context. Always end with the user choosing — never force a verdict.
 
 **Engine honest tradeoffs:**
+
+**Web (TypeScript + Vite)** — Recommended for browser-first playable prototypes and 2D games, including Phaser. No native editor, but browser performance, device input and GPU feature differences must be tested. For a selected Web engine follow `docs/engine-reference/web/SETUP.md` and skip the native-editor setup sections.
+
 
 **Godot 4**
 - Genuine strengths: 2D (best in class), stylized/indie 3D, rapid iteration, free forever (MIT), open source, gentlest learning curve, best for solo devs who want full control

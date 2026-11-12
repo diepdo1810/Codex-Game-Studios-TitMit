@@ -61,7 +61,7 @@ Read the target file(s) in full. Read AGENTS.md and select applicable path-scope
 
 Read the `specialists` block from `project.yaml`; if it is absent, fall back to the `## Engine Specialists` section of `.agents/docs/technical-preferences.md`. Note:
 
-- The **Primary** specialist — `<engine>-specialist` derived from `engine.name` (Godot→`godot-specialist`, Unity→`unity-specialist`, Unreal→`unreal-specialist`); used for architecture and broad engine concerns
+- The **Primary** specialist — `<engine>-specialist` derived from `engine.name` (Godot→`godot-specialist`, Unity→`unity-specialist`, Unreal→`unreal-specialist`, Web→`lead-programmer`); used for architecture and broad engine concerns
 - The **Language/Code Specialist** — `specialists.code` — used when reviewing the project's primary language files
 - The **Shader Specialist** — `specialists.shader` — used when reviewing shader files
 - The **UI Specialist** — `specialists.ui` — used when reviewing UI code
@@ -174,7 +174,7 @@ Spawn all applicable specialists simultaneously using available authorized nativ
 
 If an engine is configured, determine which specialist applies to each file and spawn in parallel:
 
-- Primary language files (`.gd`, `.cs`, `.cpp`) → Language/Code Specialist
+- Primary language files (`.gd`, `.cs`, `.cpp`, `.ts`, `.tsx`, `.js`) → Language/Code Specialist
 - Shader files (`.gdshader`, `.hlsl`, shader graph) → Shader Specialist
 - UI screen/widget code → UI Specialist
 - Cross-cutting or unclear → Primary Specialist
