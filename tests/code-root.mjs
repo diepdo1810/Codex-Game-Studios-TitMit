@@ -19,6 +19,8 @@ try{
  assert.equal(selected(fixture('locked','engine:\n  name: Unity\n','engine:\n  name: Godot\n')), 'Assets\tengine.name');
  assert.equal(selected(fixture('shared-only','engine:\n  name: Godot\n',null)), 'src\tengine.name');
  assert.equal(selected(fixture('web','engine:\n  name: Web\n',null)), 'src\tengine.name');
+ assert.equal(selected(fixture('web-existing','engine:\n  name: Web\n  code_root: app/src\n',null,['app/src'])), 'app/src\tengine.code_root');
+ assert.equal(selected(fixture('web-missing','engine:\n  name: Web\n  code_root: missing\n',null)), '\tunset');
  assert.equal(selected(fixture('local-only',null,'engine:\n  name: Godot\n',['Source'])), 'Source\tdetected');
  assert.equal(selected(fixture('invalid','engine:\n  name: Bogus\n','engine:\n  name: Godot\n',[],'Engine: Unity 6\n')), 'Assets\t.agents/docs/technical-preferences.md');
  assert.equal(selected(fixture('undecidable',null,'engine:\n  name: Godot\n')), '\tunset');
