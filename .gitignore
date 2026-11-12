@@ -181,3 +181,8 @@ $RECYCLE.BIN/
 /reports/
 /test-results/
 /docs/codex/evidence/
+
+# === Web: Vite, Vitest and Playwright output ===
+dist-single/
+.vitest/
+/playwright-report/
