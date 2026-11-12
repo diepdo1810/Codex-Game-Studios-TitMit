@@ -6835,7 +6835,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-10",
       "target": ".agents/skills/setup-engine/SKILL.md",
-      "target_sha256": "4e22ead3fa6c46c68abc252ba8eeaa1ac008c5a9a715c36acb7a1acacccd93ca",
+      "target_sha256": "9c8e3d49f356748085b5f0294ceed3206dbb3008e37250bc999c1dc43c04bb59",
       "related_targets": []
     },
     {
@@ -7117,7 +7117,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/smoke-check/SKILL.md",
-      "target_sha256": "86759811a016c7d0ca43e644e323079a604058e42c9e0c8acd806e2f6c46b032",
+      "target_sha256": "5bd9dfd474e4c7d5530888a73fffa99b8469e210d49a34c70531b52aa9823791",
       "related_targets": []
     },
     {
@@ -7775,7 +7775,7 @@
       "status": "EQUIVALENT",
       "task": "CGS-17",
       "target": ".agents/skills/test-setup/SKILL.md",
-      "target_sha256": "16e9f1a6e5d3cefe21a09806f85ee29c1fa1d9e73b41182d868dd5e934d83a48",
+      "target_sha256": "e088c5d03b7ce43a90d7249bc6e66e681d0927f8b7bfe2cb23c8f98af9d3baef",
       "related_targets": []
     },
     {

@@ -79,6 +79,10 @@ npm run smoke
 
 For existing games honor their package manager, scripts, and lockfile. `npm ci` is only valid with the npm scaffold's lockfile, and this guide does not authorize package installation automatically. The page's optional `window.game` debug/test hook supports deterministic scripted runs in the starter; libraries with their own loops require verification of the actual replay behavior.
 
-## 6. Summary / handoff
+## 6. Test-setup and scope
+
+For a fresh Web scaffold, Vitest and Playwright configuration plus sample tests are already provided. `$test-setup` must inspect and preserve them rather than calling the native-only `test-scaffold.sh`. Existing Web games keep their test runners unless an authorized, reviewed migration is explicitly requested. Browser screenshot tooling and human playtest cannot be inferred from a successful build.
+
+## 7. Summary / handoff
 
 Report engine, language, starter, package versions, commands, exact created files, actual build/test exit codes, whether a browser screenshot was inspected, missing prerequisites and next step. For any unrun check write NOT ASSESSED explicitly. Never state that `$setup-engine web` ran successfully when it was only documented or scaffolded.

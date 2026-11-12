@@ -33,6 +33,12 @@ A test framework installed at sprint four costs 3 sprints.
 
 ---
 
+## Web / Browser route
+
+When `engine.name` is `Web`, use the project-local `package.json` and `docs/engine-reference/web/SETUP.md` rather than native-editor test scaffolding. If the initial Web scaffold has already created `tests/unit/`, `tests/integration/`, `vite.config.ts` and `playwright.config.ts`, inspect and retain them. Check `scripts.test` and `scripts.smoke` plus the lockfile; existing JavaScript/TypeScript projects may use other runners and must not be converted without consent. If tests are missing, present a bounded plan for Vitest/Playwright or the project's own test framework; create missing test files only after the normal authorization gate.
+
+Do **not** invoke `.agents/scripts/test-scaffold.sh web`: that helper supports native engines only. Instead point to the Web scaffold files as references, preserve all existing files, and report CI integration as PENDING until a real build and browser run. For Web this route replaces Phases 2–5 below and continues at Phase 6 with exact recorded evidence. The existence of a scaffold file is not proof a test passed.
+
 ## Phase 1: Detect Engine and Existing State
 
 **Read `references/1-detect.md` now and follow it** — this phase's steps are in that file, not here. Read it again if the conversation was compacted or resumed during this phase.

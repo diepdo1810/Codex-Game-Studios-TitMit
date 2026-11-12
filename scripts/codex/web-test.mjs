@@ -12,9 +12,9 @@ const cwd=resolve(root);console.log('engine\tWeb');
 if(!existsSync(resolve(cwd,'package.json'))){console.log('rule\tweb:no-project\tNOT ASSESSED — no package.json');process.exit(0)}
 let pkg;try{pkg=JSON.parse(readFileSync(resolve(cwd,'package.json'),'utf8'))}catch(e){console.log('rule\tweb:invalid-package\tFAIL — invalid package.json');process.exit(0)}
 const script=pkg.scripts?.test;
-if(!script){console.log('rule\tweb:no-test-script\tNOT ASSESSED — no test script');process.exit(0)}
+if(!script||/no test specified/i.test(script)){console.log('rule\tweb:no-test-script\tNOT ASSESSED — no real test script');process.exit(0)}
 if(!existsSync(resolve(cwd,'node_modules'))){console.log('rule\tweb:no-dependencies\tNOT ASSESSED — dependencies missing; install only with consent');process.exit(0)}
-if(existsSync(resolve(cwd,'pnpm-lock.yaml'))||existsSync(resolve(cwd,'yarn.lock'))||existsSync(resolve(cwd,'bun.lockb'))){console.log('rule\tweb:package-manager\tNOT ASSESSED — use project package manager');process.exit(0)}
+if((pkg.packageManager && !/^npm@/.test(pkg.packageManager))||existsSync(resolve(cwd,'bun.lock'))||existsSync(resolve(cwd,'pnpm-lock.yaml'))||existsSync(resolve(cwd,'yarn.lock'))||existsSync(resolve(cwd,'bun.lockb'))){console.log('rule\tweb:package-manager\tNOT ASSESSED — use project package manager');process.exit(0)}
 console.log('command\tnpm test');
 if(dry){console.log('rule\tweb:dry-run\tNOT ASSESSED — test not executed');process.exit(0)}
 const r=spawnSync(process.platform==='win32'?'npm.cmd':'npm',['test'],{cwd,encoding:'utf8',timeout,maxBuffer:8*1024*1024});

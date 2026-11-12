@@ -16,10 +16,10 @@ game actually uses is read from its `package.json`, never from a setting.
 ## Pinned versions
 
 Exact versions, each published at least two weeks before the pin date. The
-web template's `package.json` (`.claude/engines/web/scaffold/`) pins exactly
+web template's `package.json` (`.agents/engines/web/scaffold/`) pins exactly
 these, with its lockfile committed; when one changes here, it changes there.
 The template has no library, so it pins the first five; the starters
-(`.claude/engines/web/starters/`) pin their library from this table, each with
+(`.agents/engines/web/starters/`) pin their library from this table, each with
 its own lockfile.
 
 | Package | Pinned | Published | First release of this major | Node |

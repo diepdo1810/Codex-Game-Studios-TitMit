@@ -4656,7 +4656,7 @@
       "source": ".claude/skills/setup-engine/SKILL.md",
       "source_sha256": "37c08d68ed58b70e6880e269e711e2617b89f2f165d9bba5d966e326e73e9a17",
       "target": ".agents/skills/setup-engine/SKILL.md",
-      "target_sha256": "4e22ead3fa6c46c68abc252ba8eeaa1ac008c5a9a715c36acb7a1acacccd93ca",
+      "target_sha256": "9c8e3d49f356748085b5f0294ceed3206dbb3008e37250bc999c1dc43c04bb59",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
@@ -4791,7 +4791,7 @@
       "source": ".claude/skills/smoke-check/SKILL.md",
       "source_sha256": "8531f6d673bf35704b2a0676594e3ab4d6af0153fe772ab590479247fddee6d0",
       "target": ".agents/skills/smoke-check/SKILL.md",
-      "target_sha256": "86759811a016c7d0ca43e644e323079a604058e42c9e0c8acd806e2f6c46b032",
+      "target_sha256": "5bd9dfd474e4c7d5530888a73fffa99b8469e210d49a34c70531b52aa9823791",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
@@ -5312,7 +5312,7 @@
       "source": ".claude/skills/test-setup/SKILL.md",
       "source_sha256": "7d420f14829ba4062dcaf354a91808e41523c091516160593bac048533679973",
       "target": ".agents/skills/test-setup/SKILL.md",
-      "target_sha256": "16e9f1a6e5d3cefe21a09806f85ee29c1fa1d9e73b41182d868dd5e934d83a48",
+      "target_sha256": "e088c5d03b7ce43a90d7249bc6e66e681d0927f8b7bfe2cb23c8f98af9d3baef",
       "transform_version": 1,
       "transform_ids": [
         "frontmatter-scope-v1",
