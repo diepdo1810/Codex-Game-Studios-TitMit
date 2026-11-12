@@ -64,8 +64,8 @@ export async function referenceTargets({ root = ROOT, source: gitSource = openSo
       content = PATH_BRIDGE + content;
       transform_ids.push('codex-runtime-path-bridge-v1');
     }
-    const relative = source.replace(/^\\.claude\\/docs\\//, '');
-    content = content.endsWith('\\n') ? content : content + '\\n';
+    const relative = source.replace(/^\.claude\/docs\//, '');
+    content = content.endsWith('\n') ? content : `${content}\n`;
     const overlayFile = safeProjectPath(root, 'docs/codex/overlays/reference/' + relative + '.json');
     if (existsSync(overlayFile)) {
       const raw = readFileSync(overlayFile);
