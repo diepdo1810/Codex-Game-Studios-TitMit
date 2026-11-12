@@ -18,6 +18,32 @@ jobs:
           node-version: '22'
       - run: node scripts/codex/ci.mjs
       - run: echo "Engine integration tests are PENDING; quick CI does not run engines."
+  browser-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Scaffold Phaser
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/cgs-web-game"
+          bash .agents/scripts/web-scaffold.sh --root "$RUNNER_TEMP/cgs-web-game" --starter phaser --title "Web QA"
+      - name: Install locked Web dependencies and Chromium
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/cgs-web-game"
+          npm ci
+          npx playwright install --with-deps chromium-headless-shell
+      - name: Typecheck, build, unit and browser tests
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP/cgs-web-game"
+          npm run build
+          npm test
   backend:
     strategy:
       fail-fast: false

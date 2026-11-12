@@ -23,12 +23,13 @@
 
 ## The code root is engine-specific
 
-**Two of the three supported engines will not build a project whose code sits in
+**Two of the four supported engines will not build a project whose code sits in
 `src/`.** This is not a style preference — it is a hard constraint of the engine's
 own toolchain:
 
 | `engine.name` | Code root | Why it cannot be `src/` |
 |---|---|---|
+| **Web** | `src/` (or the existing project-specific root) | Vite/TypeScript starter; preserve an existing web game's configured source layout. |
 | **Godot** | `src/` | No constraint — Godot loads from `res://` anywhere under the project root. |
 | **Unity** | `Assets/` | Unity compiles **only** `Assets/` and `Packages/`. Code outside them is invisible to the compiler. |
 | **Unreal** | `Source/<Module>/` | UnrealBuildTool discovers modules under `Source/`; content lives in `Content/`. A module elsewhere is not built. |
@@ -41,6 +42,7 @@ substitute the row above. `src/` is the table's Godot row, not a universal path.
 
 | `engine.name` | Test root | Anywhere else |
 |---|---|---|
+| **Web** | `tests/unit/`, `tests/integration/` | Vitest and Playwright read these locations in the shipped starter; existing games keep their own test paths |
 | **Godot** | `tests/unit/`, `tests/integration/` | — |
 | **Unity** | `Assets/Tests/EditMode/`, `Assets/Tests/PlayMode/` | not compiled: "0 tests, Passed" |
 | **Unreal** | `Source/<Module>/Private/Tests/` | not built: "No automation tests matched" |

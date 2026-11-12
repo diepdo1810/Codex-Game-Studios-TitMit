@@ -5,14 +5,14 @@
 </h1>
 
 A game development toolkit for OpenAI Codex.<br>
-74 Skills · 49 specialist roles · Godot, Unity & Unreal Engine
+74 Skills · 49 specialist roles · Web, Godot, Unity & Unreal Engine
 
-[![CI](https://github.com/ScrabyQ/Codex-Game-Studios/actions/workflows/codex-ci.yml/badge.svg?branch=main)](https://github.com/ScrabyQ/Codex-Game-Studios/actions/workflows/codex-ci.yml)
+[![CI](https://github.com/diepdo1810/Codex-Game-Studios-TitMit/actions/workflows/codex-ci.yml/badge.svg?branch=main)](https://github.com/ScrabyQ/Codex-Game-Studios/actions/workflows/codex-ci.yml)
 [![MIT license](https://img.shields.io/badge/license-MIT-2563eb)](LICENSE)
 [![Built for Codex](.github/badges/codex.svg)](https://learn.chatgpt.com/docs/build-skills)
 [![74 Skills](.github/badges/skills.svg)](.agents/skills)
 [![49 roles](.github/badges/roles.svg)](.codex/agents)
-[![3 engines](https://img.shields.io/badge/engines-Godot_%7C_Unity_%7C_Unreal-0e7490)](#engine-support)
+[![4 engines](https://img.shields.io/badge/engines-Web_%7C_Godot_%7C_Unity_%7C_Unreal-0e7490)](#engine-support)
 
 **[Get started](#quick-start) · [Explore the workflow](docs/WORKFLOW-GUIDE.md) · [Contribute](CONTRIBUTING.md)**
 
@@ -51,8 +51,8 @@ Written behavior specs live in [studio-tests](studio-tests). Counts above descri
 You need **Git** and a configured **Codex client**. Helpers and checks also need **Node.js 22 or 24, Bash and Python 3**. On Windows, Git for Windows supplies Bash; `CGS_BASH` can select another installation. Install the engine and toolchain only for the game you intend to build.
 
 ```sh
-git clone https://github.com/ScrabyQ/Codex-Game-Studios.git
-cd Codex-Game-Studios
+git clone https://github.com/diepdo1810/Codex-Game-Studios-TitMit.git
+cd Codex-Game-Studios-TitMit
 codex
 ```
 
@@ -114,11 +114,12 @@ This is a responsibility map, not an always-running team. Actual delegation depe
 
 | Engine | Specialist guidance | Actual execution requires |
 | --- | --- | --- |
+| **Web / Browser** | Canvas 2D, Phaser, PixiJS, Three.js using Vite + TypeScript | Node.js, a browser, and project dependencies; browser verification requires Playwright or a supported browser |
 | **Godot 4** | GDScript, C#, shaders, GDExtension, scenes and tests | A matching installed Godot editor and the project's test setup |
 | **Unity** | C#, DOTS/ECS, UI, shaders, Addressables and tests | The matching editor, license and project/package dependencies |
 | **Unreal Engine 5** | C++, Blueprints, GAS, replication, UMG and tests | A valid project, editor, compiler and required SDKs |
 
-`$setup-engine` verifies the editor and configures the project. Consult the selected [version reference](docs/engine-reference) before engine work. Guidance for an engine is separate from having run its editor, tests or export pipeline.
+`$setup-engine web` uses the pinned [Web scaffold](.agents/engines/web/UPSTREAM.md) and follows [Web setup](docs/engine-reference/web/SETUP.md); it detects existing `package.json` games without overwriting them. `$setup-engine` verifies the editor for native engines and configures the project. Consult the selected [version reference](docs/engine-reference) before engine work. Guidance for an engine is separate from having run its editor, tests or export pipeline.
 
 Engine and paid native-client checks are **opt-in**. Ordinary CI covers the toolkit on Node 22/24, with backend jobs on Linux, Windows and macOS Intel. It does not certify a game's visual quality, performance or human experience.
 
