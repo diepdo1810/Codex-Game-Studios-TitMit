@@ -4,6 +4,21 @@
     {
       "find": "## Codex execution contract\n\n",
       "replace": "## Codex execution contract\n\n**CGS-17 QA evidence contract:** Treat task APIs and hooks as optional and disclose when unavailable. A native delegate must actually run to be independent; otherwise use an explicitly labelled in-session fallback. Prior user authorization and host permissions govern all writes. Use actual configured engine, test command, runner, exit codes and test counts; unavailable runners and zero-test success are NOT ASSESSED, not PASS. Keep failures and timeouts visible. A unit or parse result cannot substitute for required visual checks.\n\n"
+    },
+    {
+      "find": "y.test-framework' Packages/manifest.json), Bash(echo present), Bash(echo ABSENT)`. Treat this as a ceiling for this skill, not a permission grant; preserve any ",
+      "replace": "y.test-framework' Packages/manifest.json), Bash(echo present), Bash(echo ABSENT), Bash(bash .agents/scripts/test-run.sh web*), Bash(npm run build*), Bash(npm run smoke*)`. Treat this as a ceiling for this skill, not a permission grant; preserve any ",
+      "target": "SKILL.md"
+    },
+    {
+      "find": "ase 1: Detect Test Setup\n\nBefore running anything, understand the environment:\n\n0. **Config coherence**: run `bash .agents/scripts/project-coherence.sh`.\n\n   It",
+      "replace": "ase 1: Detect Test Setup\n\nBefore running anything, understand the environment:\n\n**Web-specific detection (when `engine.name: Web`).** Web is a browser\ntoolchain, not a native-editor executable. Keep the shared config-coherence,\nCI and QA-plan steps below, but replace the native engine/editor check with\n`node --version`, `package.json`, the recorded package manager and the\nactual `scripts.test` / `scripts.smoke` values. Never demand a Godot,\nUnity or Unreal binary for Web.\n\nLook for runnable game tests according to the **project's own test config**;\nthe pinned scaffold uses `tests/unit/**/*.test.ts` (Vitest) and\n`tests/integration/**/*.spec.ts` (Playwright). Existing projects may use\n`*.test.tsx`, `*.spec.js` or another test root. Do not count Markdown\nchecklists, empty directories or the toolkit's `.agents/engines/web/scaffold/`\nas game test evidence. If no executable test exists, report NOT ASSESSED for\nstandard/full QA rather than a false PASS; at minimal QA follow the build +\nbrowser-launch requirement. Use `bash .agents/scripts/test-run.sh web --root .`\nto observe the npm test runner, `npm run smoke` only if declared, and\n`npm run build` for compile/build; do not install packages without consent.\nA missing browser leaves the visual check NOT ASSESSED even if unit tests pass.\n\nThe Web environment line should report `Node / package manager / browser`,\nnot an editor executable. Check an actual browser screenshot and console errors\nbefore calling a player-visible change verified. Unrun tests and browser checks\nmust remain explicitly NOT ASSESSED.\n\n\n\n0. **Config coherence**: run `bash .agents/scripts/project-coherence.sh`.\n\n   It",
+      "target": "references/1-detect-setup.md"
+    },
+    {
+      "find": "every engine\none outcome looks like success and is not; each is named below.\n\n**Godot 4** — first check that `addons/gdUnit4/bin/GdUnitCmdTool.gd` exists —\nthe ",
+      "replace": "every engine\none outcome looks like success and is not; each is named below.\n\n**Web (Vite/TypeScript)** — use the project's package manager and its real scripts.\nFor a scaffolded npm project, execute `bash .agents/scripts/test-run.sh web --root .` (or `npm test` in the game root), then `npm run smoke` for the Playwright browser boot path. The helper reports `web:no-project`, `web:no-test-script`, `web:no-dependencies` and `web:no-browser` as NOT ASSESSED; never treat missing tests or a missing browser as PASS. Record actual exit codes. If an existing project uses pnpm/yarn/bun or a different runner, use its declared command and report unavailable checks individually. Run `npm run build` and inspect a screenshot for visible changes. A unit-test pass is not a visual pass.\n\n**Godot 4** — first check that `addons/gdUnit4/bin/GdUnitCmdTool.gd` exists —\nthe ",
+      "target": "references/2-run-tests.md"
     }
   ]
 }
