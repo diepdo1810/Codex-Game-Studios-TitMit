@@ -1,14 +1,14 @@
 # Pixel Watering — Static Sprite Production V1
 
-**Date:** 2026-11-13  
-**Branch:** `codex/pixel-watering-art-bible`  
+**Date:** 2026-11-13
+**Branch:** `codex/pixel-watering-art-bible`
 **Source master:** `design/art/references/master-scene-v1.png` (941×1672 px; SHA-256 `c2aadc1c07ec5604b8af16128c4d6209b52113ef6a5c1d97156066f630ebf40b`).
 
 ## Deliverables
 
 - **9 logical assets**, `ASSET-001` to `ASSET-009`.
 - **10 individual PNG files** under `assets/images/pixel-watering/`. The terracotta pot uses distinct transparent `pot_back` and `pot_front` layers.
-- The exact user-approved ASSET-001 RGB source is retained in provenance (SHA-256 `f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49`). The runtime PNG is normalized to opaque RGBA (SHA-256 `d6e3a42c14be10ddc9ded41c00a7f16c069d6c427ae6b54e00687f54cd1aa7a2`); its decoded RGB bytes were verified unchanged.
+- The user-approved ASSET-001 RGB source is identified in provenance (SHA-256 `f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49`). Production notes record that decoded RGB bytes were verified unchanged after normalization to opaque RGBA (runtime PNG SHA-256 `d6e3a42c14be10ddc9ded41c00a7f16c069d6c427ae6b54e00687f54cd1aa7a2`). Original source image is absent from this checkout, so independent comparison cannot be reproduced here.
 - `pixel-watering-placements.json`: scene-space crop offsets, dimensions, draw order, alpha and colors.
 - `pixel-watering-SHA256SUMS.txt`: checksums for 10 PNGs, placement JSON, and two QA visual composites.
 - Offline composites under `production/qa/evidence/pixel-watering-assets/`, at 180×320 and crisp nearest-neighbor 4× zoom.
@@ -42,7 +42,7 @@ See `pixel-watering-placements.json` for offsets. PNGs are **cropped sprites**, 
 | ASSET-002–009 static base images | **CREATED + technical QA PASS** |
 | Owner/independent visual sign-off on new sprites | **PENDING** |
 | Idle/tilt/growth animation frame sets | **PENDING** |
-| Phaser scene integration and actual in-game screenshot | **PENDING** |
+| Phaser static scene integration and actual in-game screenshots | **PASS — Story 006 evidence retained** |
 | Device/performance tests | **NOT ASSESSED** |
 
-The composite images are **offline previews**, not screenshots of the running Phaser game. Do not mark gameplay or Visual/Feel story DONE until integrated and retained runtime evidence exists.
+The composite images are **offline previews**, not screenshots of the running Phaser game. Story 006 retains actual runtime screenshots in `production/qa/evidence/story-006-static-sprite-integration/`. Owner/independent visual sign-off and independent source RGB comparison remain pending; do not mark Story 006 Complete until these items are resolved.

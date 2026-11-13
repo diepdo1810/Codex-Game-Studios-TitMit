@@ -27,4 +27,4 @@
 | ASSET-008 | Water Stream | VFX | In Progress | design/assets/specs/water-vfx-assets.md |
 | ASSET-009 | Splash | VFX | In Progress | design/assets/specs/water-vfx-assets.md |
 
-> Static image status: ASSET-001 approved by owner; ASSET-002–009 generated and technically checked, awaiting independent visual sign-off. No animation frames or Phaser integration yet. See `design/assets/production/README.md`.
+> Static image status: ASSET-001 approved by owner; ASSET-002–009 generated, technically checked, and integrated as static Phaser sprites in Story 006. Independent visual sign-off remains pending. No new animation frames were created. See `design/assets/production/README.md`.

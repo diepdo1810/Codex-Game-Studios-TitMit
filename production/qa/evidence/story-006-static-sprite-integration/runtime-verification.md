@@ -1,16 +1,16 @@
 # Story 006 — Static Sprite Runtime Verification
 
-**Date:** 2026-11-13  
-**Runtime:** Vite development server at `http://127.0.0.1:5176/index.html?manual=1`; Chromium with SwiftShader WebGL.  
+**Date:** 2026-11-13
+**Runtime:** Vite preview at `http://127.0.0.1:4173/index.html?manual=1&seed=7`; Chromium with SwiftShader WebGL.
 **Reference:** `design/art/references/master-scene-v1.png` and `design/assets/production/pixel-watering-placements.json`.
 
 ## Final captures
 
-- `03-mobile-runtime-idle.png` — 390×844 touch viewport, one deterministic Phaser frame rendered.
-- `04-mobile-runtime-watering.png` — 390×844 touch viewport, one press and frame; existing can tilt, plant response, stream and splash are visible.
-- `05-desktop-runtime-idle.png` — 1280×720 viewport, one deterministic Phaser frame rendered.
+- `mobile-runtime-idle-review.png` — 390×844 viewport, current idle state.
+- `mobile-runtime-watering-review.png` — 390×844 viewport after existing water-button input and one Phaser step; growth is 20%.
+- `desktop-runtime-idle-review.png` — 1280×720 viewport, current idle state.
 
-`?manual=1` intentionally sleeps Phaser's normal loop for deterministic tests. The first screenshot attempt before a manual `window.game.step()` was blank because the scene had not presented a frame; the files above were recaptured after that frame and are the retained evidence.
+`?manual=1` intentionally sleeps Phaser's normal loop for deterministic capture. Each capture rendered a frame before screenshot.
 
 ## Runtime layer snapshot
 
@@ -33,15 +33,19 @@ The planting and can pivots preserve those idle bounds: plant `(89,228)` at orig
 
 ## Visual assessment
 
-- The final Phaser capture matches Master Scene V1's intended order and composition: sky/clear top field, clouds, distant foliage, central leafy plant over the two-part terracotta pot, wooden table, and hand-held watering can at the right.
+- The final Phaser capture matches Master Scene V1's intended order and composition: sky/clear top field, clouds, distant foliage, central leafy plant over the two-part terracotta pot, wooden table, and hand-held watering can at the right. Compared with Master Scene V1, runtime sprites use the approved controlled 26-color palette and flatter surfaces; master has more textured shading, highlights, and gradients. Layout and focal hierarchy remain aligned.
 - The art HUD-safe scene area y=0–64 remains sky-only; all art positions are whole logical pixels and use native sprite dimensions. `pixelArt: true` plus CSS `image-rendering: pixelated` produced crisp nearest-neighbor pixel edges in both retained viewport captures; no scene clipping was observed.
 - The existing HTML `Bộ sưu tập` button sits over the plant's upper leaves. It is outside Story 006's approved no-UI-change boundary, not a scene asset or Master Scene mismatch, and was not modified.
 - No console error or uncaught page error occurred in the three final captures. The final source contains no legacy Phaser Graphics artwork.
+- The existing HTML save message can cross foliage/pot with limited contrast, and the `Bộ sưu tập` button overlaps the flower bud. These are existing HUD overlays outside this static-scene story's no-UI-change scope.
 
 ## Automated checks
 
 - `npm run build` — PASS. Vite emitted its existing advisory for a minified JavaScript chunk over 500 kB.
 - `npm run test:unit` — PASS, 25/25 tests.
-- `npm run test:e2e` — PASS, 21/21 Playwright tests.
+- `npm run test:e2e` — PASS, 22/22 Playwright tests, including static asset order, load, placement, canvas, and runtime error assertions.
 - `sha256sum -c design/assets/production/pixel-watering-SHA256SUMS.txt` — recorded separately after final artifact verification.
 
+## Evidence limitations
+
+The provenance records approved background source SHA-256 `f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49`, and production notes record that decoded RGB was verified unchanged during production. Source image itself is absent from this checkout, so independent RGB identity comparison cannot be reproduced here. Owner/independent visual sign-off for ASSET-002–009 also remains pending.

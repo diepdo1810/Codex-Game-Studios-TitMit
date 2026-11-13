@@ -4,7 +4,7 @@
 > **Art Bible**: `design/art/art-bible.md`
 > **Master Reference**: `design/art/references/master-scene-v1.png` (approved visual reference; not a runtime export)
 > **Generated**: 2026-11-13
-> **Status**: 2 specs approved / 2 static sprite concepts generated / animation & Phaser integration pending
+> **Status**: 2 specs approved / 2 static sprites generated and statically integrated / owner visual sign-off and animation pending
 > **Review mode**: Solo — art-director and technical-artist not consulted; technical constraints not independently validated.
 
 ## Shared Scene Rules
@@ -43,7 +43,7 @@ A short narrow stream descends diagonally down-left from nozzle (113,215) into t
 >
 > Avoid a broad beam, screen-filling spray, opaque background, droplets outside the pot, smooth vector lines, gradients, blur, anti-aliasing, text, UI, or colors outside the palette.
 
-**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
+**Status:** In Progress — static sprite generated, automated PNG/palette/composite QA PASS, and Phaser static integration/runtime screenshots retained in Story 006 evidence. Owner visual sign-off and animation PENDING.
 
 ## ASSET-009 — Splash
 
@@ -73,7 +73,7 @@ A tiny contained impact uses a few bright stepped droplets/ripple near (95,233) 
 >
 > Avoid large splash, overflow over the rim, screen-filling particles, opaque background, gradients, blur, anti-aliasing, text, UI, or colors outside the palette.
 
-**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
+**Status:** In Progress — static sprite generated, automated PNG/palette/composite QA PASS, and Phaser static integration/runtime screenshots retained in Story 006 evidence. Owner visual sign-off and animation PENDING.
 
 ## Review Boundary
 

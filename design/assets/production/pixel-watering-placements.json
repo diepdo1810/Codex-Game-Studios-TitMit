@@ -128,6 +128,6 @@
     "prop_watering_can_tilt_base_medium.png",
     "char_hand_grip_base_small.png"
   ],
-  "note": "Static approved master-aligned artwork only; no animation frames or Phaser integration.",
+  "note": "Static master-aligned artwork only; no new animation frames. Phaser static integration is recorded in Story 006.",
   "approved_background_sha256": "f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49"
 }
