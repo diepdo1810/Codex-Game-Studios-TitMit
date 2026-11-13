@@ -1,0 +1,5 @@
+20d7a6c1a73ba9cf6e35ef4a48ea4f9d08728e3971656dffffd96e1c7c6ce980  production/qa/evidence/story-001-watering-growth/01-mobile-watering.png
+6a0b4dc82c2150022347d48869d61da5a524be909008b645936c8f0f35fe66ab  production/qa/evidence/story-003-token-gacha/01-mobile-reward.png
+cd9c32323b342ff49148384d2daf98e3d1196e46277904ac5b05b3102a6f6e2f  production/qa/evidence/story-004-collection-local-save/01-mobile-collection.png
+e2a0eb035026f60049edaea9c53ab3f966ae830bde235d4cce31407734ae744b  production/qa/evidence/story-005-garden-scene-audio/01-mobile-garden.png
+062939acd60b82e0fa9ad86fbcb9c218e373e167e811a1dac1298cb024be1180  production/qa/evidence/story-005-garden-scene-audio/02-desktop-garden.png
