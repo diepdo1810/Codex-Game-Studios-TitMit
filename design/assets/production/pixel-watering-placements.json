@@ -1,0 +1,133 @@
+{
+  "canvas": [
+    180,
+    320
+  ],
+  "master": "design/art/references/master-scene-v1.png",
+  "sprite_count": 10,
+  "assets": [
+    {
+      "file": "env_garden_background_base_scene.png",
+      "asset": "ASSET-001",
+      "scene_x": 0,
+      "scene_y": 0,
+      "width": 180,
+      "height": 320,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "colors": 6
+    },
+    {
+      "file": "env_clouds_cream_base_wide.png",
+      "asset": "ASSET-002",
+      "scene_x": 2,
+      "scene_y": 67,
+      "width": 174,
+      "height": 29,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 1
+    },
+    {
+      "file": "env_table_wood_base_wide.png",
+      "asset": "ASSET-003",
+      "scene_x": 0,
+      "scene_y": 263,
+      "width": 180,
+      "height": 57,
+      "alpha_min": 255,
+      "alpha_max": 255,
+      "colors": 5
+    },
+    {
+      "file": "plant_leafy_green_base_medium.png",
+      "asset": "ASSET-004",
+      "scene_x": 33,
+      "scene_y": 103,
+      "width": 111,
+      "height": 125,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 6
+    },
+    {
+      "file": "prop_pot_terracotta_back_base_medium.png",
+      "asset": "ASSET-005-back",
+      "scene_x": 52,
+      "scene_y": 218,
+      "width": 76,
+      "height": 16,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 4
+    },
+    {
+      "file": "prop_pot_terracotta_front_base_medium.png",
+      "asset": "ASSET-005-front",
+      "scene_x": 51,
+      "scene_y": 226,
+      "width": 78,
+      "height": 64,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 4
+    },
+    {
+      "file": "prop_watering_can_tilt_base_medium.png",
+      "asset": "ASSET-007",
+      "scene_x": 113,
+      "scene_y": 167,
+      "width": 59,
+      "height": 51,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 8
+    },
+    {
+      "file": "char_hand_grip_base_small.png",
+      "asset": "ASSET-006",
+      "scene_x": 151,
+      "scene_y": 153,
+      "width": 29,
+      "height": 33,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 4
+    },
+    {
+      "file": "vfx_water_stream_pour_small.png",
+      "asset": "ASSET-008",
+      "scene_x": 97,
+      "scene_y": 200,
+      "width": 18,
+      "height": 30,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 2
+    },
+    {
+      "file": "vfx_water_splash_impact_small.png",
+      "asset": "ASSET-009",
+      "scene_x": 93,
+      "scene_y": 221,
+      "width": 10,
+      "height": 9,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "colors": 2
+    }
+  ],
+  "layers": [
+    "env_clouds_cream_base_wide.png",
+    "env_table_wood_base_wide.png",
+    "prop_pot_terracotta_back_base_medium.png",
+    "plant_leafy_green_base_medium.png",
+    "vfx_water_stream_pour_small.png",
+    "vfx_water_splash_impact_small.png",
+    "prop_pot_terracotta_front_base_medium.png",
+    "prop_watering_can_tilt_base_medium.png",
+    "char_hand_grip_base_small.png"
+  ],
+  "note": "Static approved master-aligned artwork only; no animation frames or Phaser integration.",
+  "approved_background_sha256": "f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49"
+}
