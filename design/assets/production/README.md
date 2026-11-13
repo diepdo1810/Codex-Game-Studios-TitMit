@@ -8,16 +8,16 @@
 
 - **9 logical assets**, `ASSET-001` to `ASSET-009`.
 - **10 individual PNG files** under `assets/images/pixel-watering/`. The terracotta pot uses distinct transparent `pot_back` and `pot_front` layers.
-- Exact user-approved ASSET-001 background source retained (SHA-256 `f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49`).
+- The exact user-approved ASSET-001 RGB source is retained in provenance (SHA-256 `f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49`). The runtime PNG is normalized to opaque RGBA (SHA-256 `d6e3a42c14be10ddc9ded41c00a7f16c069d6c427ae6b54e00687f54cd1aa7a2`); its decoded RGB bytes were verified unchanged.
 - `pixel-watering-placements.json`: scene-space crop offsets, dimensions, draw order, alpha and colors.
 - `pixel-watering-SHA256SUMS.txt`: checksums for 10 PNGs, placement JSON, and two QA visual composites.
 - Offline composites under `production/qa/evidence/pixel-watering-assets/`, at 180×320 and crisp nearest-neighbor 4× zoom.
 
 ## Asset production method
 
-Approved original reference downsampled onto integer 180×320 game grid using nearest-neighbor pixel sampling. Leaf, cloud, can and hand silhouettes isolated with bounded color/polygon masks, indexed to the Art Bible's master-derived color ramps. Wooden table and pot front/back were redrawn on the same grid where source image layers overlap irrecoverably. All sprites use whole-pixel coordinates. Binary RGBA alpha (0/255) for transparent sprites; background is opaque.
+Approved original reference downsampled onto integer 180×320 game grid using nearest-neighbor pixel sampling. Leaf, cloud, can and hand silhouettes isolated with bounded color/polygon masks, indexed to the Art Bible's master-derived color ramps. Wooden table and pot front/back were redrawn on the same grid where source image layers overlap irrecoverably. All sprites use whole-pixel coordinates. Transparent sprites have binary RGBA alpha (0/255); the opaque background is runtime PNG RGBA with alpha 255 and unchanged decoded RGB pixels.
 
-**QA performed:** 10 distinct nonempty PNGs, crop bounds within 180×320, 6-color user-approved background unchanged, binary transparency, source package hash, 14 checksum manifest entries, manual inspection of offline composite. GitHub one-time import job independently verified PNG headers, dimensions, placement bounds and checksums.
+**QA performed:** 10 distinct nonempty PNGs, crop bounds within 180×320, 6-color user-approved background decoded RGB unchanged after RGBA normalization, binary transparency, source package hash, 14 checksum manifest entries, manual inspection of offline composite. GitHub one-time import job independently verified PNG headers, dimensions, placement bounds and checksums.
 
 ## Static draw order
 

@@ -1,9 +1,56 @@
 import * as Phaser from 'phaser';
 import config from '../data/config.json';
+import placements from '../design/assets/production/pixel-watering-placements.json';
+import backgroundUrl from '../assets/images/pixel-watering/env_garden_background_base_scene.png?url';
+import cloudsUrl from '../assets/images/pixel-watering/env_clouds_cream_base_wide.png?url';
+import tableUrl from '../assets/images/pixel-watering/env_table_wood_base_wide.png?url';
+import plantUrl from '../assets/images/pixel-watering/plant_leafy_green_base_medium.png?url';
+import potBackUrl from '../assets/images/pixel-watering/prop_pot_terracotta_back_base_medium.png?url';
+import potFrontUrl from '../assets/images/pixel-watering/prop_pot_terracotta_front_base_medium.png?url';
+import wateringCanUrl from '../assets/images/pixel-watering/prop_watering_can_tilt_base_medium.png?url';
+import handUrl from '../assets/images/pixel-watering/char_hand_grip_base_small.png?url';
+import waterStreamUrl from '../assets/images/pixel-watering/vfx_water_stream_pour_small.png?url';
+import waterSplashUrl from '../assets/images/pixel-watering/vfx_water_splash_impact_small.png?url';
 import { FIELD, STEP, makeRng, newState, update, roll, type Tuning, type Reward } from './game/rules';
 import { audioContext, clock, install, manual, params, seedFrom } from './hook';
 import { readSave, writeSave, type StoragePort } from './game/save';
 import { createSoundscape, type Soundscape } from './game/audio';
+
+const spriteUrls = {
+  'env_garden_background_base_scene.png': backgroundUrl,
+  'env_clouds_cream_base_wide.png': cloudsUrl,
+  'env_table_wood_base_wide.png': tableUrl,
+  'plant_leafy_green_base_medium.png': plantUrl,
+  'prop_pot_terracotta_back_base_medium.png': potBackUrl,
+  'prop_pot_terracotta_front_base_medium.png': potFrontUrl,
+  'prop_watering_can_tilt_base_medium.png': wateringCanUrl,
+  'char_hand_grip_base_small.png': handUrl,
+  'vfx_water_stream_pour_small.png': waterStreamUrl,
+  'vfx_water_splash_impact_small.png': waterSplashUrl,
+} as const;
+
+type SpriteFile = keyof typeof spriteUrls;
+const approvedLayerOrder: readonly SpriteFile[] = [
+  'env_garden_background_base_scene.png',
+  'env_clouds_cream_base_wide.png',
+  'env_table_wood_base_wide.png',
+  'prop_pot_terracotta_back_base_medium.png',
+  'plant_leafy_green_base_medium.png',
+  'vfx_water_stream_pour_small.png',
+  'vfx_water_splash_impact_small.png',
+  'prop_pot_terracotta_front_base_medium.png',
+  'prop_watering_can_tilt_base_medium.png',
+  'char_hand_grip_base_small.png',
+];
+
+function spriteFile(file: string): SpriteFile {
+  if (!(file in spriteUrls)) throw new Error(`No URL registered for approved sprite: ${file}`);
+  return file as SpriteFile;
+}
+
+function textureKey(file: SpriteFile): string {
+  return `pixel-watering:${file}`;
+}
 
 const tuning: Tuning = {
   growthPerWater: config.growthPerWater.value,
@@ -131,87 +178,101 @@ function step(): void {
 
 /** Phaser presentation; all growth decisions remain in plain game rules. */
 class Garden extends Phaser.Scene {
-  private art!: Phaser.GameObjects.Graphics;
-  private plant!: Phaser.GameObjects.Container;
-  private can!: Phaser.GameObjects.Container;
-  private stream!: Phaser.GameObjects.Graphics;
+  private readonly sprites = new Map<SpriteFile, Phaser.GameObjects.Image>();
+  private plant!: Phaser.GameObjects.Image;
+  private can!: Phaser.GameObjects.Image;
+  private stream!: Phaser.GameObjects.Image;
+  private splash!: Phaser.GameObjects.Image;
   private paused!: Phaser.GameObjects.Text;
   private acc = 0;
   /** Creates one garden presentation scene. */
   constructor() { super('garden'); }
 
+  /** Queues the approved static scene layers before Phaser creates the garden. */
+  preload(): void {
+    for (const asset of placements.assets) {
+      const file = spriteFile(asset.file);
+      this.load.image(textureKey(file), spriteUrls[file]);
+    }
+  }
+
   /** Builds stable game objects once, then installs deterministic test controls. */
   create(): void {
-    this.art = this.add.graphics();
-    this.drawBackground();
-    this.plant = this.add.container(90, 209);
-    this.drawPlant();
-    this.can = this.add.container(144, 216);
-    this.drawCan();
-    this.stream = this.add.graphics();
+    garden = this;
+    const manifestLayerOrder = [
+      spriteFile('env_garden_background_base_scene.png'),
+      ...placements.layers.map(spriteFile),
+    ];
+    if (
+      manifestLayerOrder.length !== approvedLayerOrder.length
+      || manifestLayerOrder.some((file, index) => file !== approvedLayerOrder[index])
+    ) {
+      throw new Error('Approved placement layer order does not match the static scene contract');
+    }
+
+    for (const [layer, file] of approvedLayerOrder.entries()) {
+      const asset = placements.assets.find(entry => entry.file === file);
+      if (!asset) throw new Error(`Approved placement missing for: ${file}`);
+      const key = textureKey(file);
+      if (!this.textures.exists(key)) throw new Error(`Approved texture did not load: ${file}`);
+      this.sprites.set(
+        file,
+        this.add.image(asset.scene_x, asset.scene_y, key).setOrigin(0).setDepth(layer),
+      );
+    }
+
+    // These pivots preserve the approved idle bounds while keeping the existing
+    // watering response attached to the plant base and the watering-can handle.
+    this.plant = this.sprite('plant_leafy_green_base_medium.png')
+      .setOrigin(56 / 111, 1)
+      .setPosition(89, 228);
+    this.can = this.sprite('prop_watering_can_tilt_base_medium.png')
+      .setOrigin(44 / 59, 16 / 51)
+      .setPosition(157, 183);
+    this.stream = this.sprite('vfx_water_stream_pour_small.png').setVisible(false);
+    this.splash = this.sprite('vfx_water_splash_impact_small.png').setVisible(false);
     this.paused = this.add.text(90, 154, 'TẠM DỪNG', {
       fontFamily: 'monospace', fontSize: '13px', color: '#fff4cb', backgroundColor: '#29443b',
       padding: { x: 8, y: 6 },
-    }).setOrigin(0.5).setDepth(10);
+    }).setOrigin(0.5).setDepth(20);
     this.draw();
     if (manual) this.game.loop.sleep();
     install(hook);
   }
 
-  private drawBackground(): void {
-    const g = this.art;
-    g.fillStyle(0xb5e1e6).fillRect(0, 0, FIELD.w, FIELD.h);
-    g.fillStyle(0xbce5e7).fillRect(0, 0, 180, 90);
-    g.fillStyle(0xc9e6dc).fillRect(0, 188, 180, 44);
-    g.fillStyle(0xf5e6ae).fillRect(143, 89, 18, 18).fillRect(147, 85, 10, 26);
-    g.fillStyle(0xa3ced1).fillRect(10, 109, 44, 3).fillRect(120, 127, 48, 3);
-    g.fillStyle(0xeaf2db).fillRect(12, 102, 40, 8).fillRect(20, 96, 24, 8);
-    g.fillRect(122, 120, 44, 8).fillRect(130, 114, 24, 8);
-    g.fillStyle(0xf7f5df).fillRect(23, 97, 18, 3).fillRect(134, 115, 17, 3);
-    g.fillStyle(0x9abb80).fillRect(0, 225, 28, 14).fillRect(21, 217, 21, 22).fillRect(148, 219, 32, 20);
-    g.fillStyle(0x73956b).fillRect(0, 232, 180, 88);
-    g.fillStyle(0x37564b).fillRect(0, 258, 180, 62);
-    g.fillStyle(0x79563e).fillRect(0, 240, 180, 17);
-    g.fillStyle(0xb18057).fillRect(0, 239, 180, 5);
-    g.fillStyle(0x513f34).fillRect(0, 255, 180, 3);
-    g.fillStyle(0x8e6345).fillRect(8, 246, 30, 2).fillRect(118, 250, 42, 2);
-    g.fillStyle(0xcc9b6c).fillRect(3, 240, 51, 1).fillRect(115, 240, 61, 1);
-    g.fillStyle(0x694b37).fillRect(44, 244, 2, 11).fillRect(135, 244, 2, 11);
-    g.fillStyle(0x304e42).fillRect(60, 237, 60, 4);
-    g.fillStyle(0x684735).fillRect(70, 212, 40, 25).fillRect(66, 206, 48, 10);
-    g.fillStyle(0x9c5d44).fillRect(72, 213, 36, 24);
-    g.fillStyle(0xcc8560).fillRect(68, 207, 44, 8).fillRect(76, 215, 7, 17);
-    g.fillStyle(0x4a4235).fillRect(72, 207, 36, 4);
-    g.fillStyle(0xe2a16e).fillRect(71, 211, 36, 2).fillRect(78, 217, 3, 12);
-    g.fillStyle(0x794e3c).fillRect(99, 216, 7, 17);
-    g.fillStyle(0xe6bd84).fillRect(85, 222, 10, 6);
+  private sprite(file: SpriteFile): Phaser.GameObjects.Image {
+    const image = this.sprites.get(file);
+    if (!image) throw new Error(`Approved image missing from scene: ${file}`);
+    return image;
   }
 
-  private drawPlant(): void {
-    const g = this.add.graphics();
-    g.fillStyle(0x426a42).fillRect(-2, -47, 4, 47);
-    g.fillStyle(0x5d9651).fillRect(-20, -36, 18, 9).fillRect(-16, -40, 12, 5);
-    g.fillStyle(0x86b35d).fillRect(-17, -36, 12, 3);
-    g.fillStyle(0x74a957).fillRect(2, -48, 19, 10).fillRect(5, -53, 12, 6);
-    g.fillStyle(0xa8c96b).fillRect(5, -48, 12, 3);
-    g.fillStyle(0x6a9b50).fillRect(-12, -62, 13, 10).fillRect(-9, -66, 7, 5);
-    g.fillStyle(0xb5cd76).fillRect(-8, -63, 4, 4).fillRect(9, -50, 5, 3);
-    g.fillStyle(0x3d7147).fillRect(-17, -29, 11, 3).fillRect(5, -40, 11, 3);
-    this.plant.add(g);
-  }
-
-  private drawCan(): void {
-    const g = this.add.graphics();
-    g.fillStyle(0x416b67).fillRect(-8, -17, 27, 24).fillRect(-16, -20, 14, 7);
-    g.fillStyle(0x78a7a0).fillRect(-7, -17, 23, 18).fillRect(-20, -27, 8, 10);
-    g.fillStyle(0xa8c7b2).fillRect(-4, -14, 17, 4);
-    g.lineStyle(4, 0x416b67).strokeRect(18, -18, 11, 16);
-    g.fillStyle(0xd6ac7b).fillRect(19, 0, 17, 8).fillRect(27, 5, 9, 16);
-    g.fillStyle(0xeac591).fillRect(18, -2, 10, 6);
-    g.fillStyle(0xd6ac7b).fillRect(28, 20, 9, 10);
-    g.fillStyle(0x304f46).fillRect(26, 29, 14, 10);
-    g.fillStyle(0x78a7a0).fillRect(27, 29, 12, 3);
-    this.can.add(g);
+  /** Returns immutable scene-layer facts through the existing test hook only. */
+  runtimeVisuals(): ReadonlyArray<{
+    file: SpriteFile;
+    textureLoaded: boolean;
+    depth: number;
+    visible: boolean;
+    x: number;
+    y: number;
+    originX: number;
+    originY: number;
+    bounds: { x: number; y: number; width: number; height: number };
+  }> {
+    return approvedLayerOrder.map(file => {
+      const image = this.sprite(file);
+      const bounds = image.getBounds();
+      return {
+        file,
+        textureLoaded: this.textures.exists(textureKey(file)),
+        depth: image.depth,
+        visible: image.visible,
+        x: image.x,
+        y: image.y,
+        originX: image.originX,
+        originY: image.originY,
+        bounds: { x: bounds.x, y: bounds.y, width: bounds.width, height: bounds.height },
+      };
+    });
   }
 
   /** Advances fixed simulation steps with no elapsed-time catch-up after a stall. */
@@ -230,17 +291,8 @@ class Garden extends Phaser.Scene {
     this.can.setRotation(active ? -0.4 : 0);
     this.plant.setRotation(state.response > 0 ? Math.sin(state.t * 22) * 0.07 : 0);
     this.plant.setScale(1 + (state.response > 0 ? Math.sin(state.t * 18) * 0.035 : 0));
-    this.stream.clear();
-    if (active) {
-      this.stream.fillStyle(0x62b8db);
-      const angle = this.can.rotation;
-      const spoutX = this.can.x - 20 * Math.cos(angle) + 27 * Math.sin(angle);
-      const spoutY = this.can.y - 20 * Math.sin(angle) - 27 * Math.cos(angle);
-      for (let i = 0; i < 7; i++) {
-        const p = ((state.t * 1.6 + i / 7) % 1);
-        this.stream.fillRect(Math.round(spoutX + p * (94 - spoutX)), Math.round(spoutY + p * (209 - spoutY)), 2, 4);
-      }
-    }
+    this.stream.setVisible(active);
+    this.splash.setVisible(active);
     growth.value = state.growth;
     growthValue.textContent = `${state.growth}%`;
     tokens.textContent = `Token: ${state.tokens}`;
@@ -258,6 +310,7 @@ function hasWebGL(): boolean {
 }
 
 let phaserTime = 0, lastFrame = clock.now(), stepping = false;
+let garden: Garden | undefined;
 const game = new Phaser.Game({
   type: hasWebGL() ? Phaser.WEBGL : Phaser.CANVAS,
   canvas: document.querySelector<HTMLCanvasElement>('#game')!,
@@ -270,6 +323,7 @@ const game = new Phaser.Game({
 const hook = {
   get scene() { return scene; },
   get state() { return state; },
+  get visuals() { return garden?.runtimeVisuals() ?? []; },
   press(code: string) { hit.add(code); },
   hold(code: string, on: boolean) { if (on) down.add(code); else down.delete(code); },
   step(n = 1) {
