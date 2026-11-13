@@ -1,0 +1,91 @@
+name: Retain Pixel Watering QA evidence (one-time)
+on:
+  push:
+    branches:
+      - docs/qa-pixel-watering-evidence
+permissions:
+  contents: write
+  actions: read
+jobs:
+  capture-evidence:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Import screenshots from successful main CI artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/13959732418/zip" > "$RUNNER_TEMP/pixel-qa.zip"
+          mkdir -p "$RUNNER_TEMP/pixel-qa" production/qa/evidence/story-001-watering-growth production/qa/evidence/story-005-garden-scene-audio production/qa/evidence/story-003-token-gacha production/qa/evidence/story-004-collection-local-save
+          unzip -q "$RUNNER_TEMP/pixel-qa.zip" -d "$RUNNER_TEMP/pixel-qa"
+          for entry in "mobile-watering.png:story-001-watering-growth/01-mobile-watering.png" "mobile-garden.png:story-005-garden-scene-audio/01-mobile-garden.png" "desktop-garden.png:story-005-garden-scene-audio/02-desktop-garden.png"; do
+            IFS=: read -r name target <<< "$entry"
+            src="$(find "$RUNNER_TEMP/pixel-qa" -type f -name "$name" -print -quit)"
+            test -n "$src"
+            cp "$src" "production/qa/evidence/$target"
+          done
+      - name: Render reward and collection screenshots on mobile
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npx playwright install --with-deps chromium
+          npm run build:single
+          node --input-type=module <<'JS'
+          import { chromium } from '@playwright/test';
+          import { spawn } from 'node:child_process';
+          import { setTimeout as delay } from 'node:timers/promises';
+          const preview = spawn(process.execPath, ['./node_modules/vite/bin/vite.js','preview','--outDir','dist-single','--host','127.0.0.1','--port','4173','--strictPort'], {stdio:'pipe'});
+          let browser;
+          try {
+            let ready = false;
+            for(let i=0;i<80;i++){
+              if(preview.exitCode !== null) throw new Error('Vite preview quit');
+              try { if((await fetch('http://127.0.0.1:4173/')).ok){ready=true;break;} } catch {}
+              await delay(250);
+            }
+            if(!ready) throw new Error('Vite preview startup timeout');
+            browser = await chromium.launch({headless:true,args:['--use-gl=angle','--use-angle=swiftshader-webgl','--enable-unsafe-swiftshader']});
+            const page = await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true,deviceScaleFactor:1});
+            const errors=[];
+            page.on('pageerror',err=>errors.push(err.message));
+            page.on('console',msg=>{if(msg.type()==='error') errors.push(msg.text())});
+            await page.goto('http://127.0.0.1:4173/index.html?manual=1&seed=7');
+            await page.waitForFunction(()=>typeof window.game?.step==='function');
+            for(let i=0;i<5;i++){
+              await page.getByRole('button',{name:'Tưới cây',exact:true}).tap();
+              await page.evaluate(()=>window.game.step(60));
+            }
+            const tokens=await page.evaluate(()=>window.game.state.tokens);
+            if(tokens!==3) throw new Error('Expected 3 earned tokens; got '+tokens);
+            await page.getByRole('button',{name:/Gacha/}).tap();
+            await page.locator('#reward').waitFor({state:'visible'});
+            await page.screenshot({path:'production/qa/evidence/story-003-token-gacha/01-mobile-reward.png'});
+            await page.locator('#close-reward').tap();
+            await page.getByRole('button',{name:'Bộ sưu tập',exact:true}).tap();
+            await page.locator('#collection').waitFor({state:'visible'});
+            await page.screenshot({path:'production/qa/evidence/story-004-collection-local-save/01-mobile-collection.png'});
+            if(errors.length)throw new Error('Browser errors: '+JSON.stringify(errors));
+            console.log('PASS captured reward and collection screens; no browser errors');
+          } finally { if(browser)await browser.close(); preview.kill(); }
+          JS
+      - name: Commit retained screenshots to this QA branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          find production/qa/evidence -type f -name '*.png' -print0 | sort -z | xargs -0 sha256sum > production/qa/evidence/SHA256SUMS.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add production/qa/evidence
+          git diff --cached --check
+          git commit -m 'test(qa): retain actual pixel watering browser screenshots'
+          git push origin "HEAD:$GITHUB_REF_NAME"
