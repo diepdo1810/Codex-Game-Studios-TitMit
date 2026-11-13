@@ -1,0 +1,31 @@
+name: Import approved master scene PNG once
+on:
+  push:
+    branches:
+      - codex/pixel-watering-art-bible
+permissions:
+  contents: write
+jobs:
+  upload:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Import original image and verify checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p design/art/references
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://at.adobe.com/kRvBbPp9sGhOTGxM' \
+            --output design/art/references/master-scene-v1.png
+          echo '2b0318ad9dcf319c305d9fb74de613ba68eb1f5ea6aa5071f6c160eeb05fd862  design/art/references/master-scene-v1.png' | sha256sum --check --status
+          file design/art/references/master-scene-v1.png
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add design/art/references/master-scene-v1.png
+          git diff --cached --check
+          git commit -m 'art: add approved master scene visual reference'
+          git push origin "HEAD:$GITHUB_REF_NAME"
