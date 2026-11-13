@@ -9,33 +9,33 @@
 
 | # | Name | Type | Description | Source | Status |
 |---|------|------|-------------|--------|--------|
-| 1 | Garden background | Environment | Opaque 180×320 base with calm blue sky and restrained, low-contrast distant garden. No extra props. Keep the upper 0–45% open for sky and growth-bar clearance. | Brief; Art Bible §§1, 2, 6, 8 | Needed |
-| 2 | Clouds | Environment | Cream clouds with irregular stepped curves; low contrast and placed clear of the plant focal silhouette. | Brief; Art Bible §§3, 4, 6 | Needed |
-| 3 | Wooden table | Environment | Warm wood tabletop spans the width, beginning near y=239–240; proposed thickness 24 px (7.5% canvas height). Use a few broad pixel-grain bands. | Brief; Art Bible §§4, 6 | Needed |
-| 4 | Flower pot | Prop | Centered, symmetric tapered terracotta pot; proposed bounds x=62–118, y=208–240. Keep rim and front lip readable. | Brief; Art Bible §§3, 4, 6 | Needed |
-| 5 | Plant | Environment | Primary focal silhouette centered near x=90; proposed bounds x=66–114, y=144–218. Canopy mainly y=144–208, stem overlaps pot opening. Leaves form distinct organic stepped clusters. | Brief; Art Bible §§1, 3, 6 | Needed |
-| 6 | Hand | Character | Simplified hand enters at lower right; proposed bounds x=145–179, y=213–260. Fingers visibly wrap the handle. No face or added character features. | Brief; Art Bible §§3, 6 | Needed |
-| 7 | Watering can | Prop | Compact can at the right edge; proposed bounds x=130–179, y=205–252, near the brief's x≈144 anchor. Short diagonal spout aims into pot; nozzle sits above stream origin. | Brief; Art Bible §§3, 6 | Needed |
-| 8 | Water stream | VFX | Short diagonal stream from nozzle into pot opening. Keep narrow so it does not cover the plant silhouette; bright pixels contrast locally against foliage and pot. | Brief; Art Bible §§1–3, 6 | Needed |
-| 9 | Splash | VFX | Tiny contained droplets/ripple inside the pot opening, readable at native resolution; no screen-filling burst. | Brief; Art Bible §§1–3, 6 | Needed |
+| 1 | Garden background | Environment | Opaque 180×320 base; master-sampled blue sky and low-contrast side foliage y≈188–263. Keep HUD safe area y=0–64 clear. | Brief; Art Bible §§1, 2, 4, 6, 8 | Needed |
+| 2 | Clouds | Environment | Sparse stepped cream clouds, measured group envelope x=2–176, y=67–96; HUD safe area remains clear. | Brief; Art Bible §§3, 4, 6 | Needed |
+| 3 | Wooden table | Environment | Full-width warm table begins near y=263 and fills to the bottom edge, with broad grain and visible front fascia. | Brief; Art Bible §§4, 6 | Needed |
+| 4 | Flower pot | Prop | Centered tapered terracotta pot, bounds x=51–128, y=218–289; split into aligned pot_back and pot_front draw layers. | Brief; Art Bible §§3, 4, 6, 8 | Needed |
+| 5 | Plant | Environment | Central plant bounds x=34–144, y=105–228; canopy ends above pot mouth and stem enters the opening. | Brief; Art Bible §§1, 3, 6 | Needed |
+| 6 | Hand | Character | Enters from right, bounds x=152–180, y=154–194; grip near (164,178), fingers wrap the can handle. | Brief; Art Bible §§3, 6 | Needed |
+| 7 | Watering can | Prop | Copper can and diagonal spout, bounds x=113–174, y=167–218; pivot near handle (157,183), nozzle near (113,215). | Brief; Art Bible §§3, 6 | Needed |
+| 8 | Water stream | VFX | Short down-left stream from nozzle (113,215) into pot opening; bounds x=96–116, y=207–234. | Brief; Art Bible §§1–3, 6 | Needed |
+| 9 | Splash | VFX | Tiny droplets/ripple in pot opening; bounds x=90–101, y=222–234, behind pot_front. | Brief; Art Bible §§1–3, 6 | Needed |
 
 ### Proposed per-asset layout spec
 
-All bounds and anchors below are **scene-space proposals on the shared 180×320 logical canvas**, not final trimmed PNG canvas sizes. Origin is the scene's top-left; x increases right and y increases down. Alpha means pixels outside the visible shape in the future separated sprite. Exact frame counts and timing remain open because Art Bible §8 does not set them.
+All bounds and anchors below are **master-measured scene-space estimates on the shared 180×320 canvas**, not final trimmed PNG sizes. They were read from the approved 941×1672 reference using sx=180/941 and sy=320/1672, then rounded to integer pixels (approximately ±1–2 px). Origin is top-left; x increases right and y increases down. Alpha means transparent pixels outside the visible sprite. Exact animation timing remains open because Art Bible §8 does not set it.
 
 | Asset | Proposed visible bounds (x, y, w, h) | Layer | Anchor / placement | Transparency | Animation requirement |
 |---|---:|---|---|---|---|
-| Garden background | 0, 0, 180, 320 | 1, far back | Top-left (0,0), fills scene | Opaque for master; sky/base layer may be opaque | Static |
-| Clouds | 10, 30, 160, 95 (group envelope) | 2 | Group placed at (10,30); individual clouds keep fixed integer positions | RGBA transparent around cloud shapes | Static in master; optional subtle drift is not specified or approved |
-| Wooden table | 0, 239, 180, 24 | 3 | Top-left (0,0), placed at scene (0,239); tabletop top edge at y≈239 | RGBA transparent outside table silhouette | Static |
-| Plant | 66, 144, 48, 74 | 4 | Bottom-center (24,74), placed at scene (90,218) | RGBA transparent outside leaves/stem | Idle and brief watering response; same canvas and anchor |
-| Flower pot | 62, 208, 56, 32 | 5–6 (rear/body, then front lip) | Bottom-center (28,32), placed at scene (90,240) | RGBA transparent outside pot; rear rim/body and front lip may be separate draw pieces | Static in master |
-| Water stream | 99, 205, 31, 16 | 7 | Nozzle/top-right origin near local (31,0); ends down-left inside pot opening | RGBA transparent outside water pixels | Absent and pouring states; frame canvas/anchor aligned |
-| Splash | 88, 212, 18, 8 | 7 | Center-bottom (9,8), placed near scene (97,220) inside opening | RGBA transparent outside droplets/ripple | Absent and small impact states; frame canvas/anchor aligned |
-| Hand | 145, 213, 35, 47 | 8 | Grip point near local (15,14), scene (160,227) | RGBA transparent outside hand | Idle and pouring grip pose; align to can handle |
-| Watering can | 130, 205, 50, 47 | 8 | Tilt pivot near local (12,25), scene (142,230) | RGBA transparent outside can | Upright and tilted/pouring states; same canvas and pivot |
+| Garden background | 0, 0, 180, 320 | 1 | Top-left (0,0), fills scene | Opaque | Static |
+| Clouds | 2, 67, 174, 29 (group envelope) | 2 | Group top-left (2,67) | RGBA transparent around cloud shapes | Static in master |
+| Wooden table | 0, 263, 180, 57 | 3 | Top-left (0,263) | RGBA transparent outside table silhouette | Static |
+| Plant | 34, 105, 110, 123 | 5 | Bottom-center anchor (89,228) | RGBA transparent outside leaves/stem | Idle and gentle watering response; aligned canvas/anchor |
+| Flower pot | 51, 218, 77, 71 (shared envelope) | 4 pot_back; 8 pot_front | Both parts share bottom-center anchor (89,289) | RGBA transparent; aperture stays open; rear/front pixels separated | Static in master |
+| Water stream | 96, 207, 20, 27 | 6 | Nozzle origin (113,215); falls down-left | RGBA transparent outside water pixels | Absent and pouring; aligned canvas/anchor |
+| Splash | 90, 222, 11, 12 | 7 | Center-bottom anchor (95,233) inside opening | RGBA transparent outside droplets/ripple | Absent and small impact; aligned canvas/anchor |
+| Hand | 152, 154, 28, 40 | 10 | Grip anchor near (164,178) | RGBA transparent outside hand | Idle and pouring grip; aligned to can |
+| Watering can | 113, 167, 61, 51 | 9 | Tilt pivot near handle (157,183) | RGBA transparent outside can | Upright and tilted; same canvas and pivot |
 
-The table's proposed 24 px thickness is 7.5% of scene height, within the Art Bible's 5–8% range. Water VFX overlap the pot opening; the hand/can render above them and the nozzle covers the stream origin. Bounds are adjustable together during master-scene review to preserve that overlap and avoid collisions.
+These master-derived bounds replace the earlier estimates: table begins near y=263, plant/pot are larger, and hand/can sit higher. Layer order is background → clouds → table → pot_back → plant → stream → splash → pot_front → can → hand. The front lip masks the lower stem and VFX edge while leaving the center aperture visible.
 
 ## UI Screens
 
@@ -64,11 +64,10 @@ No audio assets included in this visual inventory.
 
 ### Composition and anchors
 
-- Sky and quiet distant garden: y=0–144 (0–45%); preserve about 32–64 px at the top as breathing room for the growth bar.
-- Plant canopy centered near x=90, mainly y=144–208. Pot centered near x=90, y=208–240.
-- Table begins around y=239–240 and spans x=0–179; proposed thickness 24 px (7.5% of scene height).
-- Hand and can enter from the right in x=130–179, y=205–262; keep handle, fingers, spout, and nozzle distinct at native size.
-- Stream travels diagonally down-left from nozzle into pot opening; splash remains within the opening.
+- HUD safe area: x=10–170, y=0–64; preserve uninterrupted sky without cloud or foreground silhouettes.
+- Clouds: x=2–176, y=67–96. Plant: x=34–144, y=105–228. Pot: x=51–128, y=218–289.
+- Table begins near y=263 and fills the lower edge. Hand/can occupy the right around x=113–180, y=154–218.
+- Stream descends down-left from nozzle (113,215); splash stays around x=90–101, y=222–234 inside the opening.
 - These are composition bounds, not final trimmed sprite canvases. Per-asset anchors, trim bounds, and animation canvases belong in later sprite specs.
 
 ### Layer order (back to front)
@@ -76,13 +75,15 @@ No audio assets included in this visual inventory.
 1. Opaque sky and quiet distant garden.
 2. Clouds.
 3. Table top and visible front edge.
-4. Plant canopy, leaves, and stem.
-5. Pot rear rim, pot body, and soil.
-6. Pot front lip.
-7. Water stream and small splash inside the pot.
-8. Hand and watering can. Fingers overlap the handle; nozzle overlaps the stream origin slightly.
+4. Pot_back: rear rim, back body, and rear soil plane.
+5. Plant canopy, leaves, and stem.
+6. Water stream, beginning beneath the nozzle.
+7. Splash inside the opening.
+8. Pot_front: front rim/lip and front body, with a transparent opening; mask lower stem and VFX edge.
+9. Watering can.
+10. Hand; fingers overlap the handle.
 
-Plant, pot, and water receive the strongest local contrast. Background, clouds, and table stay simpler. Warm light comes from upper-left; compact pixel shadows fall lower-right. Use only the seven Art Bible colors: `#82C6D3`, `#F4E8C8`, `#315A45`, `#6F9A57`, `#9A6344`, `#C87558`, `#F2C76E`. Keep the palette closed; create value separation through controlled pixel placement.
+Plant, pot, and water receive the strongest local contrast. Background, clouds, and table stay simpler. Warm light comes from upper-left; compact pixel shadows fall lower-right. Use the seven base Art Bible colors plus the master-derived ramps in §4, with palette membership kept controlled.
 
 ### Animation scope recorded for later specs
 
@@ -96,9 +97,9 @@ Art Bible §8 requires consistent animation canvas and anchor but does not defin
 
 ### Master-scene generation prompt
 
-> Create one static cozy 16-bit pixel-art garden scene for a mobile portrait game, exact canvas 180×320 pixels, 9:16. A calm blue sky and a few cream stepped clouds sit above a quiet low-contrast garden. Leave the top 10–20% visually open for later growth UI. In the center, show one lively green potted plant on a warm wooden table, with a clear terracotta tapered pot and readable rim. At lower right, a simplified hand holds a compact watering can whose short diagonal spout points toward the pot. Show a narrow bright stream entering the pot and a tiny contained splash. Composition anchors: plant and pot centered around x=90; canopy roughly y=144–208; pot y=208–240; tabletop begins near y=239–240; hand/can occupy the right edge around x=130–179 and y=205–262. Use only this palette: sky `#82C6D3`, cloud/light `#F4E8C8`, deep outline/shadow `#315A45`, foliage `#6F9A57`, wood `#9A6344`, terracotta `#C87558`, warm highlight `#F2C76E`. Warm natural light from upper-left; compact pixel shadows fall lower-right. Crisp integer-grid pixels, stepped organic leaf and cloud silhouettes, broad simple wood-grain bands, strong readability at native size. Keep plant, pot, and water as the focal group; background remains quiet. Static unified preview with opaque full-canvas background.
+> Create one static cozy 16-bit pixel-art garden scene for a mobile portrait game, exact canvas 180×320 pixels, 9:16. Preserve a clear sky HUD safe area x=10–170, y=0–64; clouds begin below it. Center the large leafy plant and terracotta pot on a wooden table that begins near y=263. Plant bounds are x=34–144, y=105–228; pot bounds x=51–128, y=218–289; hand/can sit at the right around x=113–180, y=154–218. A narrow stream runs from nozzle (113,215) into the opening and a tiny splash stays behind the front rim. Use the master-sampled palette additions in Art Bible §4, including sky #68C3DE, foliage #76A750/#7EAB3E, terracotta #E96D37, wood #CF7341, and water #FFF8E9. Warm light comes from upper-left, shadows fall lower-right; crisp controlled pixel clusters. Static unified preview with opaque full-canvas background.
 >
-> Avoid extra props, extra pots or plants, text, logos, HUD graphics, borders, gradient lighting, anti-aliasing, blur, glossy 3D rendering, noisy texture, oversized splash, cropped nozzle, hidden pot rim, water covering the plant silhouette, colors outside the seven-color palette, or imitation of any specific film/studio character or composition.
+> Avoid extra props, extra pots or plants, text, logos, artwork inside the HUD safe area, borders, gradients, anti-aliasing, blur, glossy 3D rendering, noisy texture, oversized splash, cropped nozzle, hidden pot opening, water covering the plant silhouette, colors outside the Art Bible palette, or imitation of any specific film/studio character or composition.
 
 ## Review Boundary
 

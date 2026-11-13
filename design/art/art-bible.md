@@ -47,7 +47,9 @@ Các trạng thái dùng chung một khu vườn và ánh sáng tự nhiên; ch�
 | Đất nung | `#C87558` | Chậu đất; phân biệt chậu với lá và mặt bàn. |
 | Nắng vàng | `#F2C76E` | Ánh sáng và điểm nhấn thưởng; không báo nguy hiểm. |
 
-- Giữ 7 màu nền tảng; tạo sáng tối bằng phân bố pixel và phối màu có kiểm soát, không mở rộng bảng màu tùy tiện.
+- Giữ 7 màu nền tảng làm palette tương thích cho UI, điểm nhấn và ngữ cảnh ngoài master. Mở rộng scene palette bằng các swatch lấy mẫu đại diện từ master; đây là ramp có kiểm soát, không phải giữ mọi sắc độ anti-alias trong ảnh.
+- **Master scene palette additions:** sky `#68C3DE`; cloud `#F9E5CA`; outline `#363728`; garden shadow/mid `#417441` / `#76A750`; leaf shadow/base/highlight `#475028` / `#7EAB3E` / `#D9D86C`; soil `#BF6624`; pot shadow/shade/base/highlight `#4C3F2B` / `#C4592E` / `#E96D37` / `#FFE493`; wood shadow/base/highlight `#51442F` / `#CF7341` / `#F59949`; copper can `#B77B2F`; hand `#FDCB99`; water `#FFF8E9`.
+- Các swatch trên là màu đại diện đã giảm từ vùng ảnh master; dùng chúng làm ramp 16-bit gọn cho scene. Màu gốc bảy sắc vẫn hợp lệ nhưng không thay thế swatch master ở các mảng nền chính, ví dụ sky master dùng `#68C3DE`.
 - Trời và mây sáng, mát nhẹ; cây nhận sắc xanh trung tính; bàn và chậu ấm hơn nền. Điểm vàng chỉ dùng ở vùng sáng hoặc nhấn thưởng.
 - UI dùng kem mây làm nền và xanh viền vườn cho chữ/viền; không thêm màu semantic riêng.
 - Không dùng màu đơn độc để biểu đạt tương tác hay thưởng: ghép với hình giọt nước, silhouette phần thưởng, đường viền hoặc chuyển động ngắn. Không phân biệt cây/vật phẩm chỉ bằng màu lá.
@@ -60,14 +62,28 @@ much detail survives at game camera distance (LOD philosophy).
 
 ## 6. Environment Design Language
 
-- **Master scene:** một khung dọc duy nhất 180×320, không tách biome hoặc parallax. Dành 10–20% phía trên làm khoảng thoáng cho thanh tăng trưởng; trời và mây chiếm khoảng 0–45% chiều cao; nhóm cảnh chính nằm trong dải 45–82%; phần dưới còn lại giữ yên và ít chi tiết.
-- **Bố cục và tỷ lệ:** cây/chậu ở giữa khung (x≈50%); tán cây khoảng y=45–65%, chậu y=65–75%. Mặt bàn bắt đầu gần y=75%, kéo ngang khung và dày 5–8% chiều cao. Tay/bình ở bên phải (x=73–100%, y=64–82%), vòi nghiêng vào cây. Dòng nước đi chéo ngắn vào chậu, không che silhouette chính.
-- **Layer từ sau ra trước:** trời → vườn xa ít tương phản → mây → mặt/cạnh bàn → tán/lá/thân → thành sau, thân chậu và đất → mép trước chậu → dòng nước và splash nhỏ trong chậu → tay/bình; ngón tay phủ lên quai, đầu vòi che nhẹ điểm bắt đầu dòng nước.
+- **Master scene:** một khung dọc duy nhất 180×320, không parallax. Giữ vùng HUD sạch trong y=0–64 (20% chiều cao); master có khoảng trời trống đến gần y=67. Cây, chậu, tay và bình dựa theo bounds ở bảng dưới.
+- **Bounds và anchor scene-space:** tọa độ từ góc trên trái, đã quy đổi gần đúng từ 941×1672 bằng sx=180/941, sy=320/1672 và làm tròn tới pixel nguyên. Bounds là bao silhouette quan sát được, sai số ước lượng khoảng ±1–2 px; không phải canvas PNG đã trim.
+
+| Thành phần | Bounds (x, y, w, h) | Anchor / đặt tại |
+|---|---:|---|
+| Background | 0, 0, 180, 320 | top-left (0,0) |
+| Clouds (group) | 2, 67, 174, 29 | top-left (2,67) |
+| Garden foliage trong background | hai cạnh, khoảng y=188–263 | thuộc background |
+| Wooden table | 0, 263, 180, 57 | top-left (0,263) |
+| Plant, gồm thân | 34, 105, 110, 123 | bottom-center (89,228) |
+| Flower pot, tổng thể | 51, 218, 77, 71 | bottom-center (89,289); pot_back/front cùng pivot |
+| Hand | 152, 154, 28, 40 | grip (164,178) |
+| Watering can, gồm vòi | 113, 167, 61, 51 | pivot gần quai (157,183) |
+| Water stream | 96, 207, 20, 27 | nozzle origin (113,215) |
+| Splash | 90, 222, 11, 12 | center-bottom (95,233) |
+
+- **Layer từ sau ra trước:** 1 background → 2 clouds → 3 table → 4 pot_back (nửa sau miệng, đất phía sau và thân chậu sau) → 5 plant → 6 water stream → 7 splash → 8 pot_front (mép trước miệng và thân chậu trước, che gốc thân/đáy hiệu ứng; giữ lỗ miệng trong suốt) → 9 watering can → 10 hand. Đầu vòi che nhẹ điểm bắt đầu stream; ngón tay phủ quai. Splash nằm trong aperture, mép trước có thể che phần dưới để tạo chiều sâu.
 - **Ánh sáng:** nguồn sáng ấm ngoài khung từ trên trái; highlight ngắn trên lá, mép chậu, bàn và bình; bóng pixel gọn đổ về dưới phải. Không dùng gradient mờ.
 - **Chất liệu và mật độ:** trời phẳng, mây có đường bậc cong, gỗ dùng vài dải vân lớn; đất nung và lá dùng mảng sáng–trung–tối gọn. Chỉ dùng thành phần trong brief, không thêm vật trang trí.
 - **Độ đọc và kể chuyện môi trường:** cây/chậu/nước có tương phản cao nhất; bàn, mây và vườn xa lùi bằng ít chi tiết hơn. Tay, quai, vòi và nước vẫn nhận ra ở kích thước nhỏ. Kể chuyện bằng ánh sáng, màu và vật liệu của khu vườn, không dựa vào vật thể mới.
 
-Các tỷ lệ là đề xuất bố cục cho Art Bible, bám scaffold hiện có: cây x=90, bình x=144, mặt bàn khoảng y=239. Chúng không thay đổi gameplay hay logic.
+Các bounds đo từ ảnh master 941×1672 rồi quy đổi gần đúng sang 180×320; ảnh nguồn không phải runtime export pixel-perfect. Các cập nhật này là chuẩn hình ảnh/layer, không thay đổi gameplay, UI logic hay Phaser.
 
 ## 7. UI/HUD Visual Direction
 
@@ -77,7 +93,7 @@ feel, and any art-direction versus readability conflict and how it was decided.
 
 ## 8. Asset Standards
 
-- **Thứ tự sản xuất:** duyệt một scene preview hợp nhất trước; sau đó mới tách sprite riêng. Mọi sprite vẫn thuộc master scene 180×320, palette 7 màu và hướng sáng trên-trái.
+- **Thứ tự sản xuất:** duyệt một scene preview hợp nhất trước; sau đó mới tách sprite riêng. Mọi sprite vẫn thuộc master scene 180×320, palette nền 7 màu cộng scene ramps tại §4 và hướng sáng trên-trái.
 - **Định dạng:** sprite runtime dùng PNG RGBA lossless; nền trời có thể opaque, các layer chồng ghép dùng transparency.
 - **Lưới pixel và animation:** vẽ trên lưới pixel logic, tránh anti-aliasing và tọa độ/scale lẻ. Mọi frame animation giữ cùng canvas và anchor để không giật vị trí. Sprite tĩnh cắt phần padding trong suốt dư sát nội dung; frame animation giữ biên chung cần thiết.
 - **Kích thước:** lấy theo vùng và tỷ lệ trong Section 6; chưa quy định kích thước rời rạc cho từng sprite. Lượt đầu dùng sprite PNG riêng, chưa tạo atlas vì repo chưa có ảnh/pipeline atlas và chưa có số liệu cho thấy cần.

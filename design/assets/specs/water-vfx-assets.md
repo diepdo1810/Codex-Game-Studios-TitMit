@@ -9,10 +9,10 @@
 
 ## Shared Scene Rules
 
-- Logical scene: 180×320 px, portrait 9:16. Bounds below are estimated visible scene-space envelopes, not final trimmed PNG canvas dimensions.
+- Logical scene: 180×320 px, portrait 9:16. Bounds are measured from the approved 941×1672 image with sx=180/941 and sy=320/1672, rounded to pixels (about ±1–2 px); they are not trimmed PNG dimensions.
 - Separate runtime assets: lossless PNG RGBA, transparent outside water pixels, crisp integer pixel grid, no anti-aliasing.
-- Closed palette: sky `#82C6D3`, cream `#F4E8C8`, deep garden `#315A45`, foliage `#6F9A57`, wood `#9A6344`, terracotta `#C87558`, warm highlight `#F2C76E`.
-- Water uses cream `#F4E8C8` for local contrast; do not add a new blue palette color.
+- Use the master-sampled scene ramps in Art Bible §4; the original seven colors remain available for compatibility and accents.
+- Water uses sampled off-white `#FFF8E9` for local contrast; do not add a new blue palette color.
 - Frame count/timing, texture ceiling, and device performance are NOT ASSESSED where the Art Bible does not set them.
 
 ## ASSET-008 — Water Stream
@@ -20,26 +20,26 @@
 | Field | Value |
 |-------|-------|
 | Category | VFX |
-| Dimensions | Visible bounds x=99, y=205, w=31, h=16 px on the shared scene |
+| Dimensions | Master-measured bounds x=96, y=207, w=20, h=27 px on the shared scene |
 | Format | PNG RGBA lossless; transparent except for stream pixels |
 | Naming | `vfx_water_stream_pour_small.png` |
-| Anchor | Nozzle origin near local (31,0); stream travels down-left into pot opening |
-| Layer | 7, below hand/can; origin tucks under nozzle slightly |
+| Anchor | Nozzle origin at scene (113,215); stream travels down-left into opening |
+| Layer | 6, above plant/soil and below pot_front/can |
 | Animation | Absent and pouring states; frames/cadence/timing NOT ASSESSED |
 
 **Visual Description:**
 
-A short, narrow diagonal stream runs from the nozzle into the pot opening. Keep it continuous but compact so it does not cover the plant. Bright stepped clusters contrast locally against leaves and terracotta.
+A short narrow stream descends diagonally down-left from nozzle (113,215) into the pot opening. It remains clear of the plant silhouette and contrasts against soil and terracotta. The can covers the origin slightly; pot_front masks the lower edge.
 
 **Art Bible Anchors:**
 - §1–2: water leads the eye during a restrained, gentle watering action.
 - §3: stepped diagonal silhouette, not a smooth antialiased line.
-- §4: cream `#F4E8C8` from the seven-color palette; contrast comes from placement.
-- §6 and §8: separate transparent layer, correct nozzle-to-opening placement, aligned future frames.
+- §4: sampled water `#FFF8E9` with local contrast from soil/pot; palette remains controlled.
+- §6 and §8: transparent layer at the measured nozzle/opening position; future frames share canvas/anchor.
 
 **Generation Prompt:**
 
-> Create a separate transparent water-stream sprite for a cozy 16-bit pixel-art mobile garden scene. Fit estimated bounds x=99–130, y=205–221 on the 180×320 portrait composition. A narrow bright stepped stream starts near the watering-can nozzle at the upper-right of this envelope and travels diagonally down-left into the flower-pot opening. Use cream #F4E8C8 water pixels from the approved seven-color palette, in compact crisp clusters. Keep the stream short and clear of the plant silhouette. Provide aligned absent and pouring states on a shared canvas and anchor; frame count and timing are unspecified.
+> Create a separate transparent water-stream sprite for a cozy 16-bit pixel-art mobile garden scene, bounds x=96–116, y=207–234 on the 180×320 portrait composition. Start beneath the watering-can nozzle at (113,215) and descend down-left into the flower-pot opening. Use sampled water #FFF8E9 from Art Bible §4 in compact crisp clusters. Keep the stream narrow and clear of the plant silhouette; the can covers its origin and pot_front can mask its lower edge. Provide aligned absent and pouring states on a shared canvas and anchor; frame count and timing remain unspecified.
 >
 > Avoid a broad beam, screen-filling spray, opaque background, droplets outside the pot, smooth vector lines, gradients, blur, anti-aliasing, text, UI, or colors outside the palette.
 
@@ -50,26 +50,26 @@ A short, narrow diagonal stream runs from the nozzle into the pot opening. Keep 
 | Field | Value |
 |-------|-------|
 | Category | VFX |
-| Dimensions | Visible bounds x=88, y=212, w=18, h=8 px on the shared scene |
+| Dimensions | Master-measured bounds x=90, y=222, w=11, h=12 px on the shared scene |
 | Format | PNG RGBA lossless; transparent except tiny droplets/ripple pixels |
 | Naming | `vfx_water_splash_impact_small.png` |
-| Anchor | Center-bottom local (9,8), placed near scene (97,220), inside pot opening |
-| Layer | 7, contained in opening; pot front lip may overlap its lower edge |
+| Anchor | Center-bottom at scene (95,233), inside pot opening |
+| Layer | 7, inside opening and before pot_front at layer 8 |
 | Animation | Absent and small impact states; frames/cadence/timing NOT ASSESSED |
 
 **Visual Description:**
 
-A tiny contained impact uses a few bright stepped droplets or a short ripple inside the pot opening. It should read at native size without escaping the rim or becoming a large burst.
+A tiny contained impact uses a few bright stepped droplets/ripple near (95,233) inside the pot opening. It remains visible between the rear soil plane and front lip, with the lip masking only its lower edge.
 
 **Art Bible Anchors:**
 - §1–2: watering response is joyful but soft and brief.
 - §3: distinct stepped droplet shapes.
-- §4: cream `#F4E8C8` against the dark opening, using only the approved palette.
-- §6 and §8: contained inside the pot, separate transparent layer, stable future frame anchor.
+- §4: sampled water `#FFF8E9` against soil/terracotta, using only the Art Bible ramps.
+- §6 and §8: contained inside the pot, separate transparent layer, stable anchor at (95,233).
 
 **Generation Prompt:**
 
-> Create a separate transparent tiny water-splash sprite for a cozy 16-bit pixel-art mobile garden scene. Fit estimated bounds x=88–106, y=212–220 inside the centered pot opening on the 180×320 portrait scene. Show only a few bright stepped droplets and/or a very short ripple, contained by the rim and readable at native size. Use cream #F4E8C8 from the approved seven-color palette and crisp integer-grid clusters. Keep the effect small and gentle. Provide absent and aligned impact states on a common canvas and center-bottom anchor; frame count and timing are unspecified.
+> Create a separate transparent tiny water-splash sprite for a cozy 16-bit pixel-art mobile garden scene, bounds x=90–101, y=222–234 inside the centered pot opening on the 180×320 portrait scene. Show only a few bright stepped droplets and/or a very short ripple around center-bottom anchor (95,233), contained by the rim. Use sampled water #FFF8E9 from Art Bible §4 and crisp integer-grid clusters. Keep the effect small and gentle; pot_front may cover only the lower edge. Provide absent and aligned impact states on a common canvas; frame count/timing remain unspecified.
 >
 > Avoid large splash, overflow over the rim, screen-filling particles, opaque background, gradients, blur, anti-aliasing, text, UI, or colors outside the palette.
 
@@ -77,4 +77,4 @@ A tiny contained impact uses a few bright stepped droplets or a short ripple ins
 
 ## Review Boundary
 
-Bounds and nozzle/opening overlap are scene-space estimates from the approved inventory. Art Bible §8 requires consistent future animation canvas/anchor but does not define timing or frame counts. No image generation, sprite export, gameplay, Phaser, or UI implementation is included.
+Bounds and nozzle/opening overlap are rounded measurements; recheck them during sprite extraction. Art Bible §8 requires consistent future animation canvas/anchor but does not define timing or frame counts. No image generation, sprite export, gameplay, Phaser, or UI implementation is included.
