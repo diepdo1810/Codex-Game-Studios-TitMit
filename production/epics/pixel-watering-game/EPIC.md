@@ -26,3 +26,4 @@
 | 003 | Gacha cây và vật phẩm | Integration | Ready | N/A |
 | 004 | Bộ sưu tập và lưu cục bộ | Integration | Ready | N/A |
 | 005 | Hoàn thiện cảnh vườn và âm thanh | Visual/Feel | Ready | N/A |
+| 006 | Integrate Approved Static Pixel Art Assets | Integration | Ready | N/A |

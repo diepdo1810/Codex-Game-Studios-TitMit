@@ -18,6 +18,8 @@
 export interface GameHook {
   readonly scene: string;
   readonly state: unknown;
+  /** Read-only presentation data for runtime visual verification. */
+  readonly visuals?: unknown;
   /** The key (a KeyboardEvent.code) goes down for one step. */
   press(code: string): void;
   /** The key is held down, or let go. */

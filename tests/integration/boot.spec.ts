@@ -1,7 +1,33 @@
 import { expect, test, type Page, type Browser } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
 // Same HTTP origin in managed Chromium and CI; webServer owns startup.
 const build = (query: string): string => `http://127.0.0.1:4173/index.html?${query}`;
+const placements = JSON.parse(readFileSync(new URL('../../design/assets/production/pixel-watering-placements.json', import.meta.url), 'utf8')) as {
+  sprite_count: number;
+  assets: Array<{ file: string; scene_x: number; scene_y: number; width: number; height: number }>;
+};
+const expectedSpriteOrder = [
+  'env_garden_background_base_scene.png',
+  'env_clouds_cream_base_wide.png',
+  'env_table_wood_base_wide.png',
+  'prop_pot_terracotta_back_base_medium.png',
+  'plant_leafy_green_base_medium.png',
+  'vfx_water_stream_pour_small.png',
+  'vfx_water_splash_impact_small.png',
+  'prop_pot_terracotta_front_base_medium.png',
+  'prop_watering_can_tilt_base_medium.png',
+  'char_hand_grip_base_small.png',
+];
+
+type RuntimeVisual = {
+  file: string;
+  textureLoaded: boolean;
+  depth: number;
+  x: number;
+  y: number;
+  bounds: { x: number; y: number; width: number; height: number };
+};
 
 /** Opens real Phaser build and retains all runtime/console errors for assertions. */
 async function open(page: Page, query = 'manual=1'): Promise<string[]> {
@@ -49,6 +75,31 @@ test('boots a portrait garden without console errors @boot', async ({ page }) =>
   expect(size!.width / size!.height).toBeCloseTo(9 / 16, 3);
   await expect(page.getByRole('button', { name: 'Tưới cây', exact: true })).toBeVisible();
   await expect(page.getByRole('progressbar')).toHaveAttribute('value', '0');
+  expect(errors).toEqual([]);
+});
+
+test('loads every approved sprite in the specified order and placement bounds', async ({ page }) => {
+  const errors = await open(page);
+  const canvas = await page.locator('canvas').evaluate(node => ({ width: node.width, height: node.height }));
+  const visuals = await page.evaluate(() => (window.game!.visuals ?? []) as RuntimeVisual[]);
+
+  expect(canvas).toEqual({ width: 180, height: 320 });
+  expect(placements.sprite_count).toBe(10);
+  expect(visuals).toHaveLength(placements.sprite_count);
+  expect(visuals.map(visual => visual.file)).toEqual(expectedSpriteOrder);
+
+  for (const [depth, visual] of visuals.entries()) {
+    const placement = placements.assets.find(asset => asset.file === visual.file);
+    expect(placement).toBeDefined();
+    expect(visual.textureLoaded).toBe(true);
+    expect(visual.depth).toBe(depth);
+    expect(Number.isInteger(visual.x)).toBe(true);
+    expect(Number.isInteger(visual.y)).toBe(true);
+    expect(visual.bounds.x).toBeCloseTo(placement!.scene_x, 10);
+    expect(visual.bounds.y).toBe(placement!.scene_y);
+    expect(visual.bounds.width).toBe(placement!.width);
+    expect(visual.bounds.height).toBe(placement!.height);
+  }
   expect(errors).toEqual([]);
 });
 
