@@ -4,7 +4,7 @@
 > **Art Bible**: `design/art/art-bible.md`
 > **Master Reference**: `design/art/references/master-scene-v1.png` (approved visual reference; not a runtime export)
 > **Generated**: 2026-11-13
-> **Status**: 1 asset specced / 1 spec approved / 0 in production / 0 done
+> **Status**: 1 spec approved / 1 static PNG approved by owner / 0 integrated
 > **Review mode**: Solo — art-director and technical-artist not consulted; technical constraints not independently validated.
 
 ## ASSET-001 — Garden Background
@@ -45,4 +45,4 @@ Foreground bounds, anchors, and layer order now follow Art Bible §6 and the inv
 >
 > Avoid clouds, tabletop, plant, flower pot, soil, hand, watering can, water stream, splash, extra props, buildings, text, any artwork in the HUD safe area, gradients, anti-aliasing, blur, parallax, high-frequency noise, or colors outside Art Bible §4.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** Approved — user-approved static PNG at `assets/images/pixel-watering/env_garden_background_base_scene.png` (180×320, SHA-256 `f192633e313be9aae3a45a8793bb49a9cf34b9dd7457f44b08d853047051af49`); Phaser integration pending.

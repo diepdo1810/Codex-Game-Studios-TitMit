@@ -10,3 +10,95 @@
 #   date: 2026-01-31
 #   ships: true               # false for a file only the build uses
 #   placeholder: true         # until it is replaced, with _ph before the extension; leave the line out otherwise
+
+# Pixel Watering static art pack V1 — approved master source, produced 2026-11-13.
+- path: assets/images/pixel-watering/env_garden_background_base_scene.png
+  origin: ai
+  tool: "GPT Image / palette normalization"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/env_clouds_cream_base_wide.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/env_table_wood_base_wide.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/plant_leafy_green_base_medium.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/prop_pot_terracotta_back_base_medium.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/prop_pot_terracotta_front_base_medium.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/char_hand_grip_base_small.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/prop_watering_can_tilt_base_medium.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/vfx_water_stream_pour_small.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false
+- path: assets/images/pixel-watering/vfx_water_splash_impact_small.png
+  origin: ai
+  tool: "Pillow and OpenCV static master extraction / pixel-art cleanup"
+  source:
+    vendor: OpenAI / owner-approved original artwork
+    product: Pixel Watering Master Scene V1
+    url: https://github.com/diepdo1810/Codex-Game-Studios-TitMit/blob/codex/pixel-watering-art-bible/design/art/references/master-scene-v1.png
+  date: 2026-11-13
+  ships: false

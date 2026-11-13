@@ -4,7 +4,7 @@
 > **Art Bible**: `design/art/art-bible.md`
 > **Master Reference**: `design/art/references/master-scene-v1.png` (approved visual reference; not a runtime export)
 > **Generated**: 2026-11-13
-> **Status**: 2 assets specced / 2 specs approved / 0 in production / 0 done
+> **Status**: 2 specs approved / 2 static sprite concepts generated / animation & Phaser integration pending
 > **Review mode**: Solo — art-director and technical-artist not consulted; technical constraints not independently validated.
 
 ## Shared Scene Rules
@@ -43,7 +43,7 @@ One large lively plant is centered near x=89. The canopy occupies approximately 
 >
 > Avoid extra plants, flowers, fruit, pot, background fill, thin details, gradients, blur, anti-aliasing, text, UI, or colors outside the palette. Do not invent animation timing or frame count.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
 
 ## ASSET-005 — Flower Pot
 
@@ -73,7 +73,7 @@ A centered, symmetric tapered terracotta pot. pot_back contains the rear rim, ba
 >
 > Avoid handles, painted decoration, extra props, background fill, hidden opening, overly thin rim, gradients, blur, anti-aliasing, text, UI, or colors outside the palette.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
 
 ## Review Boundary
 

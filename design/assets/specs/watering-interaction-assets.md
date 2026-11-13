@@ -4,7 +4,7 @@
 > **Art Bible**: `design/art/art-bible.md`
 > **Master Reference**: `design/art/references/master-scene-v1.png` (approved visual reference; not a runtime export)
 > **Generated**: 2026-11-13
-> **Status**: 2 assets specced / 2 specs approved / 0 in production / 0 done
+> **Status**: 2 specs approved / 2 static sprite concepts generated / animation & Phaser integration pending
 > **Review mode**: Solo — art-director and technical-artist not consulted; technical constraints not independently validated.
 
 ## Shared Scene Rules
@@ -43,7 +43,7 @@ A simplified hand enters from the right at y≈154 and visibly wraps around the 
 >
 > Avoid realistic skin texture, extra limbs, jewelry, background fill, thin unreadable fingers, gradients, blur, anti-aliasing, text, UI, or colors outside the palette. Do not invent timing.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
 
 ## ASSET-007 — Watering Can
 
@@ -73,7 +73,7 @@ A copper-toned watering can occupies the right side, with a distinct body, handl
 >
 > Avoid decorations, background fill, cropped nozzle, hidden handle, long hose, glossy 3D material, gradients, blur, anti-aliasing, text, UI, or colors outside the palette. Do not invent timing.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
 
 ## Review Boundary
 

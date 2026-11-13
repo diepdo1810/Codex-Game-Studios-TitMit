@@ -4,7 +4,7 @@
 > **Art Bible**: `design/art/art-bible.md`
 > **Master Reference**: `design/art/references/master-scene-v1.png` (approved visual reference; not a runtime export)
 > **Generated**: 2026-11-13
-> **Status**: 2 assets specced / 2 specs approved / 0 in production / 0 done
+> **Status**: 2 specs approved / 2 static sprite concepts generated / animation & Phaser integration pending
 > **Review mode**: Solo — art-director and technical-artist not consulted; technical constraints not independently validated.
 
 ## Shared Scene Rules
@@ -43,7 +43,7 @@ Sparse cream clouds with irregular stepped curves sit below the clear HUD band. 
 >
 > Avoid opaque sky fill, sun, stars, birds, text, UI elements, artwork in the HUD safe area, blur, gradients, anti-aliasing, dense cloud texture, smooth vector edges, or colors outside the approved palette.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
 
 ## ASSET-003 — Wooden Table
 
@@ -73,7 +73,7 @@ A warm wooden tabletop spans the width from y≈263 to the bottom, with a front 
 >
 > Avoid table legs or extra props, dense wood noise, background fill, text, UI, gradients, blur, anti-aliasing, or colors outside the palette.
 
-**Status:** Needed — specification approved; image asset not generated.
+**Status:** In Progress — static sprite generated in `assets/images/pixel-watering/`; automated PNG/palette/composite QA PASS; owner visual sign-off and animation/Phaser integration PENDING.
 
 ## Review Boundary
 
