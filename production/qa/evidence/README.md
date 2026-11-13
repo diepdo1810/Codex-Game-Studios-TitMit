@@ -14,7 +14,7 @@ QA review date: 2026-11-13.
 - `story-004-collection-local-save/01-mobile-collection.png`: mobile unlocked-item collection.
 - `SHA256SUMS.txt`: SHA-256 integrity manifest of retained PNGs.
 
-First 3 PNGs copied unchanged from CI artifact 13959732418. Last 2 PNGs captured from merged game in Chromium; inspect them before independent sign-off.
+First 3 PNGs copied unchanged from CI artifact 13959732418 (SHA-256 verified against source). Last 2 PNGs captured from merged game in Chromium. All 5 images visually inspected in-session on 2026-11-13: readable portrait composition, visible watering stream, centered gacha and collection dialogs, no obvious clipping. Independent QA-lead sign-off is still PENDING.
 
 ## Automated checks
 
